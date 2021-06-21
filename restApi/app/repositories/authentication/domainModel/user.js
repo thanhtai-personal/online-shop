@@ -1,12 +1,12 @@
 const { DataTypes, Model } = require('sequelize');
-const { sequelize } = require('./../sequelize')
+const { sequelize } = require('./../../../sequelize')
 const bcrypt = require('bcryptjs')
-const { saltPrefix } = require('./../env')
+const { saltPrefix } = require('./../../../../env')
 const { v4: uuidv4, validate: uuidValidate } = require('uuid')
 
-class User extends Model { }
+class UserRepository extends Model { }
 
-User.init({
+UserRepository.init({
   id: {
     type: DataTypes.UUID,
     primaryKey: true
@@ -75,4 +75,6 @@ User.init({
   sequelize
 })
 
-module.exports =  User
+var userRepository = new UserRepository()
+
+module.exports = userRepository

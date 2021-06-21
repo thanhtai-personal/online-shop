@@ -1,6 +1,6 @@
 const { DataTypes, Model } = require('sequelize')
 const { v4: uuidv4, validate: uuidValidate } = require('uuid')
-const { sequelize } = require('./../sequelize')
+const { sequelize } = require('./../../../sequelize')
 
 class GoogleAccount extends Model { }
 
@@ -48,4 +48,6 @@ GoogleAccount.init({
 })
 
 
-module.exports = GoogleAccount
+const googleAccountRepository = new GoogleAccount()
+
+module.exports =  googleAccountRepository

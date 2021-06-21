@@ -4,11 +4,9 @@ module.exports =  async (pool, isEnd = false) => {
     ALTER TABLE googleaccount ADD COLUMN IF NOT EXISTS "createdBy" uuid;
     ALTER TABLE "user" ADD COLUMN IF NOT EXISTS "createdBy" uuid;
     ALTER TABLE resource ADD COLUMN IF NOT EXISTS "createdBy" uuid;
-    ALTER TABLE eventnote ADD COLUMN IF NOT EXISTS "createdBy" uuid;
     ALTER TABLE googleaccount ADD COLUMN IF NOT EXISTS "updatedBy" uuid;
     ALTER TABLE "user" ADD COLUMN IF NOT EXISTS "updatedBy" uuid;
     ALTER TABLE resource ADD COLUMN IF NOT EXISTS "updatedBy" uuid;
-    ALTER TABLE eventnote ADD COLUMN IF NOT EXISTS "updatedBy" uuid;
   `
   try {
     await pool.query(migrateQuery)

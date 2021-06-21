@@ -4,7 +4,6 @@ module.exports =  async (pool, isEnd = false) => {
     ALTER TABLE googleaccount ADD COLUMN IF NOT EXISTS "isActive" boolean DEFAULT true;
     ALTER TABLE "user" ADD COLUMN IF NOT EXISTS "isActive" boolean DEFAULT true;
     ALTER TABLE resource ADD COLUMN IF NOT EXISTS "isActive" boolean DEFAULT true;
-    ALTER TABLE eventnote ADD COLUMN IF NOT EXISTS "isActive" boolean DEFAULT true;
   `
   try {
     await pool.query(migrateQuery)

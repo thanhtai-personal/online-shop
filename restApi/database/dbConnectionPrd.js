@@ -1,8 +1,7 @@
-const pool = require('./dev/pool')
+const pool = require('./product/pool')
 const migrate = require('./migrate')
 
 if (!pool) console.log('No pool!!!')
-
 pool.on('connect', () => {
   console.log('connected to the db')
 })
@@ -88,6 +87,31 @@ const createGoogleAccountTable = async (isEnd = false) => {
 }
 
 /**
+ * Create Event Note Table
+ */
+const createEventNoteTable = async (isEnd = false) => {
+  console.log('createEventNoteTable start')
+  const eventNoteCreateQuery = `CREATE TABLE IF NOT EXISTS eventnote
+  (
+      id uuid NOT NULL,
+      "userId" uuid NOT NULL,
+      "contentText" text COLLATE pg_catalog."default",
+      "contentHtml" text COLLATE pg_catalog."default",
+      "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+      "updatedAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+      CONSTRAINT eventnote_pkey PRIMARY KEY (id)
+  )`
+  try {
+    await pool.query(eventNoteCreateQuery)
+    console.log('querry success')
+    isEnd && pool.end()
+  } catch (error) {
+    console.log('query error', error)
+    isEnd && pool.end()
+  }
+}
+
+/**
  * Drop User Table
  */
 const dropUserTable = async (isEnd = false) => {
@@ -136,6 +160,38 @@ const dropGoogleAccount = async (isEnd = false) => {
   }
 }
 
+/**
+ * Drop EventNote Table
+ */
+ const dropEventNoteTable = async (isEnd = false) => {
+  console.log('dropEventNoteTable start')
+  const eventNoteDropQuery = `DROP TABLE IF EXISTS "eventnote"`
+  try {
+    await pool.query(eventNoteDropQuery)
+    console.log('querry success')
+    isEnd && pool.end()
+  } catch (error) {
+    console.log('query error', error)
+    isEnd && pool.end()
+  }
+}
+
+/**
+ * Drop Client Table
+ */
+const dropClientTable = async (isEnd = false) => {
+  console.log('Drop client table start')
+  const eventNoteDropQuery = `DROP TABLE IF EXISTS "client"`
+  try {
+    await pool.query(eventNoteDropQuery)
+    console.log('querry success')
+    isEnd && pool.end()
+  } catch (error) {
+    console.log('query error', error)
+    isEnd && pool.end()
+  }
+}
+
 const createReferenceKey = async (isEnd = false) => {
   console.log('createReferenceKey start')
   const createReferenceKeyQueryResource = `ALTER TABLE resource ADD CONSTRAINT fkey_resource_event_note FOREIGN KEY ("eventId")
@@ -154,9 +210,14 @@ const createReferenceKey = async (isEnd = false) => {
     REFERENCES "user" (id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION`
+  const createReferenceKeyQueryEventNote = `ALTER TABLE eventnote ADD CONSTRAINT fkey_eventnote_user FOREIGN KEY ("userId")
+    REFERENCES "user" (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION`
   try {
     await pool.query(createReferenceKeyQueryResource)
     await pool.query(createReferenceKeyQueryGoogleAccount)
+    await pool.query(createReferenceKeyQueryEventNote)
     console.log('querry success')
     isEnd && pool.end()
   } catch (error) {
@@ -192,10 +253,10 @@ const dropReferenceKey = async (isEnd = false) => {
  */
 module.exports = {
   createAllTables: async () => {
-    // await createDatabase('event-note')
     await createUserTable()
     await createResourceTable()
     await createGoogleAccountTable()
+    await createEventNoteTable()
     await createReferenceKey(true)
   }
   ,
@@ -207,7 +268,9 @@ module.exports = {
     await dropReferenceKey()
     await dropUserTable()
     await dropResourceTable()
-    await dropGoogleAccount(true)
+    await dropGoogleAccount()
+    await dropEventNoteTable()
+    await dropClientTable(true)
   },
 
   /**

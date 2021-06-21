@@ -1,5 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
-const { sequelize } = require('./../sequelize')
+const { sequelize } = require('./../../../sequelize')
 
 class Permission extends Model { }
 
@@ -32,4 +32,6 @@ Permission.init({
   sequelize
 })
 
-module.exports =  Permission
+const permissionRepository = new Permission()
+
+module.exports =  permissionRepository
