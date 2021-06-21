@@ -75,6 +75,6 @@ UserRepository.init({
   sequelize
 })
 
-var userRepository = new UserRepository()
+const userRepository = new UserRepository()
 
 module.exports = userRepository

@@ -37,7 +37,7 @@ const createUserTable = async (isEnd = false) => {
  * Create resource Table
  */
 const createResourceTable = async (isEnd = false) => {
-  console.log('query start')
+  console.log('createResourceTable start')
   const resourceCreateQuery = `CREATE TABLE IF NOT EXISTS resource
   (
       id uuid NOT NULL,
@@ -138,10 +138,7 @@ const dropGoogleAccount = async (isEnd = false) => {
 
 const createReferenceKey = async (isEnd = false) => {
   console.log('createReferenceKey start')
-  const createReferenceKeyQueryResource = `ALTER TABLE resource ADD CONSTRAINT fkey_resource_event_note FOREIGN KEY ("eventId")
-    REFERENCES eventnote (id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION,
+  const createReferenceKeyQueryResource = `ALTER TABLE resource 
   ADD CONSTRAINT fkey_resource_google_account FOREIGN KEY ("accountId")
     REFERENCES googleaccount (id) MATCH SIMPLE
     ON UPDATE NO ACTION
@@ -171,13 +168,9 @@ const dropReferenceKey = async (isEnd = false) => {
   DROP CONSTRAINT IF EXISTS fkey_resource_google_account,
   DROP CONSTRAINT IF EXISTS fkey_resource_user`
   const dropReferenceKeyQueryGoogleAccount = `ALTER TABLE IF EXISTS googleaccount DROP CONSTRAINT IF EXISTS fkey_googleaccount_user`
-  const dropReferenceKeyQueryEventNote = `ALTER TABLE IF EXISTS eventnote DROP CONSTRAINT IF EXISTS fkey_eventnote_user`
-  const dropReferenceKeyQueryClient = `ALTER TABLE IF EXISTS client DROP CONSTRAINT IF EXISTS fkey_client_user`
   try {
     await pool.query(dropReferenceKeyQueryResource)
     await pool.query(dropReferenceKeyQueryGoogleAccount)
-    await pool.query(dropReferenceKeyQueryEventNote)
-    await pool.query(dropReferenceKeyQueryClient)
     console.log('querry success')
     isEnd && pool.end()
   } catch (error) {

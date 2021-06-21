@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "backend:start": "cd restApi && npm run debug",
+    "frontend:start": "cd client && npm start",
+    "database:create": "cd restApi && npm run create-dev-tables",
+    "database:migrate": "cd restApi && npm run migrate-tables"
+  }
+}

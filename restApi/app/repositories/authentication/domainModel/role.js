@@ -51,6 +51,6 @@ Role.init({
 })
 
 
-const roleRepository = new RolePermission()
+const roleRepository = new Role()
 
 module.exports =  roleRepository

@@ -1,6 +1,6 @@
 const User = require('../domainModel/user')
 
-User.prototype.getByUserName = async (username, getPassword) => {
+User.getByUserName = async (username, getPassword) => {
   const user = await User.findOne({
     attributes: {
       exclude: getPassword ? [] : ['password']

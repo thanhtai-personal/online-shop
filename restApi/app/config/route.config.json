@@ -1,9 +1,16 @@
 {
   "routes": [
     {
-      "route": "/v1/clowns/:clownid",
+      "route": "/v1/authen/login",
       "method": "POST",
-      "controller": "../controllers/v1/circus/democontroller1-controller"
+      "controller": "../controllers/v1/authentication/authenticate.controller",
+      "action": "login"
+    },
+    {
+      "route": "/v1/authen/register",
+      "method": "POST",
+      "controller": "../controllers/v1/authentication/authenticate.controller",
+      "action": "register"
     }
   ]
 }
