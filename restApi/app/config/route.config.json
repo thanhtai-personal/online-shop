@@ -1,0 +1,9 @@
+{
+  "routes": [
+    {
+      "route": "/v1/clowns/:clownid",
+      "method": "POST",
+      "controller": "../controllers/v1/circus/democontroller1-controller"
+    }
+  ]
+}
