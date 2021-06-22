@@ -1,12 +1,39 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { ConnectedRouter } from 'connected-react-router'
 
-ReactDOM.render(
+import AppRoute from './appRoute'
+import Store from './store'
+import reportWebVitals from './reportWebVitals'
+
+const { store, history } = Store.getInstance()
+
+const NODE_MOUNT = document.getElementById('root')
+
+const renderApp = () =>
+  render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <AppRoute />
+        </ConnectedRouter>
+      </Provider>
+    </React.StrictMode>,
+    NODE_MOUNT
+  )
+
+if (process.env.NODE_ENV !== 'production' && module.hot) {
+  module.hot.accept('./appRoute', renderApp)
+}
+
+render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <AppRoute />
+      </ConnectedRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
