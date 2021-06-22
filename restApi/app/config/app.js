@@ -1,10 +1,11 @@
+
 const http = require('http');
 const express = require('express');
 const application = express();
 const bodyParser = require('body-parser');
 const routeConfig = require('./route-config');
 const settingsConfig = require('./settings/settings-config');
-
+const compression = require('compression')
 
 function configureApplication(application) {
   application.use(bodyParser.json());
@@ -16,6 +17,16 @@ function configureApplication(application) {
     res.type('application/json');
     next();
   });
+  // Use gzip compression
+  app.use(compression({ filter: (req, res) => {
+    if (req.headers['x-no-compression']) {
+      // don't compress responses with this request header
+      return false
+    }
+   
+    // fallback to standard filter function
+    return compression.filter(req, res)
+  } }))
 }
 
 function configureRoutes(application) {

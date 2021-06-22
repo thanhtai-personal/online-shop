@@ -1,1 +1,1 @@
-# my-best-pratice
+# apply-best-pratice
