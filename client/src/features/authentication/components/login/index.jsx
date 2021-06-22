@@ -1,17 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
-
+import LoginView from './presentation'
 
 const LoginComponent = (props) => {
   
-  return (<>
-    login component  
-  </>)
+  return (<LoginView />)
 }
 
 const mapState = (state) => ({
-  // inputData: Util.get(state, `${FEATURE_AUTH}.${FORM_LOGIN}.data`),
 })
 
 const mapDispatch = () => {

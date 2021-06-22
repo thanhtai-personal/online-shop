@@ -1,17 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import SignupView from './presentation'
 
 
 const RegisterComponent = (props) => {
-  
-  return (<>
-    register component  
-  </>)
+  return (<SignupView />)
 }
 
 const mapState = (state) => ({
-  // inputData: Util.get(state, `${FEATURE_AUTH}.${FORM_LOGIN}.data`),
 })
 
 const mapDispatch = () => {
