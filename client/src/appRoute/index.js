@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router'
 import AppRouteManager from 'root/managers/appRoute/instant'
 import authenRoute from 'root/features/authentication/routes'
+import './_reset.css'
 
 const appRouteManager = AppRouteManager()
 
