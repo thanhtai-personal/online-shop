@@ -12,8 +12,7 @@ const unsetFeature = () => {
     store.sagasManager.remove(FEATURE_AUTH_KEY, authenSagas)
     store.updateReducer()
     store.updateSagas()
-}
-  console.log('++++++++++++END UNSET AUTHENTICATION+++++++++++++', store?.getState())
+  }
 }
 
 export default unsetFeature

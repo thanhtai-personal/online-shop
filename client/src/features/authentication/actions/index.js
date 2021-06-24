@@ -1,15 +1,18 @@
 import {
   LOGIN,
   SIGNUP,
-  UPDATEINPUT,
-  GOOGLE_LOGIN,
-  GETAUTH
+  UPDATE_LOGIN_INPUT,
 } from './types'
 
-export const login = (data) => {
+export const login = () => {
   return {
-    type: LOGIN,
-    payload: data
+    type: LOGIN
+  }
+}
+
+export const googleLogin = () => {
+  return {
+    type: LOGIN
   }
 }
 
@@ -20,25 +23,9 @@ export const register = (data) => {
   }
 }
 
-export const updateInputData = (form, key, value) => {
+export const updateField = (field, value) => {
   return {
-    type: UPDATEINPUT,
-    payload: { form, key, value }
+    type: UPDATE_LOGIN_INPUT,
+    payload: { field, value }
   }
 }
-
-export const updateGoogleLoginData = (data) => {
-  return {
-    type: GOOGLE_LOGIN,
-    payload: data,
-  }
-}
-
-
-export const getAuth = (token) => {
-  return {
-    type: GETAUTH,
-    payload: token,
-  }
-}
-

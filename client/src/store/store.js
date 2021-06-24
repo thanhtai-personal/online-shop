@@ -7,7 +7,6 @@ import createReducerManager from 'root/managers/reducer/instant'
 import createSagasManager from 'root/managers/sagas/instant'
 
 export default function configureStore(initialState, history) {
-  console.log('call initial store')
   const sagaMiddleware = createSagaMiddleware()
   const middlewares = [sagaMiddleware, routerMiddleware(history)]
   if (process.env.NODE_ENV !== 'production') {

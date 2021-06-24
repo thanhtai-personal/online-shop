@@ -10,7 +10,7 @@ const LoginContainer = (props) => {
     return () => {
       unset()
     }
-  }, [])
+  }, [setup, unset])
 
   return (
     <Suspense fallback={<LoadingComponent />}>

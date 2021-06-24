@@ -18,7 +18,7 @@ function configureApplication(application) {
     next();
   });
   // Use gzip compression
-  app.use(compression({ filter: (req, res) => {
+  application.use(compression({ filter: (req, res) => {
     if (req.headers['x-no-compression']) {
       // don't compress responses with this request header
       return false

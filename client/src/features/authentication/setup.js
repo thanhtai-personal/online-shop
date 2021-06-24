@@ -3,7 +3,7 @@ import authenReducer from './reducers/authen.reducer'
 import authenSagas from './sagas'
 import { FEATURE_AUTH_KEY } from './constants'
 
-const { store} = Store.getInstance()
+const { store } = Store.getInstance()
 
 const setupFeature = () => {
   let mapObject = store.sagasManager.getSagasMap()
@@ -12,7 +12,7 @@ const setupFeature = () => {
     store.sagasManager.add(FEATURE_AUTH_KEY, authenSagas)
     store.updateReducer()
     store.updateSagas()
-}
+  }
   console.log('++++++++++++END SETUP AUTHENTICATION+++++++++++++', store?.getState())
 }
 
