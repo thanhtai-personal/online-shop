@@ -20,8 +20,22 @@ export const LoginWrapper = styled.div`
     background: url(${(props) => props.leftPanelImage});
     background-position: center;
     background-size: cover;
+    @media (max-width: 1340px) {
+      width: 35%;
+    }
+    @media (max-width: 1190px) {
+      display: none;
+    }
   }
   .right-panel {
+    @media (max-width: 1340px) {
+      width: 65%;
+    }
+    @media (max-width: 1190px) {
+      width: 100%;
+    }
+    min-width: 440px;
+    min-height: 650px;
     display: flex;
     justify-content: center;
     justify-items: center;
@@ -30,6 +44,9 @@ export const LoginWrapper = styled.div`
     height: 100%;
     opacity: 0.8;
     form {
+      @media (max-width: 675px) {
+        width: 90%;
+      }
       h1 {
         font-weight: bold;
         font-size: 24px;
