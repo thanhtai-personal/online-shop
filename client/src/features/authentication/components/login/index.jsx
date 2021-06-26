@@ -13,7 +13,7 @@ const LoginComponent = (props) => {
   const { googleLogin = () => {}
     , login = () => {}
     , updateField = () => {},
-    loading
+    loading, loginData, errorsNumber
   } = props
   
   const handleLogin = useCallback((e) => {
@@ -33,11 +33,15 @@ const LoginComponent = (props) => {
     onGoogleLogin={handleGoogleLogin}
     onUpdateField={handleUpdateField}
     loading={loading}
+    loginData={loginData}
+    errorsNumber={errorsNumber}
   />)
 }
 
-const mapState = (state) => ({
-  loading: state['login']?.loading
+const mapState = ({ login = {} }) => ({
+  loading: login.loading,
+  loginData: login.loginData,
+  errorsNumber: login.loginErrorsNumber
 })
 
 const mapDispatch = {

@@ -11,7 +11,7 @@ const {
 const initalState = {
   loginData: loginModel,
   currentUser: {},
-  error: {},
+  loginErrorsNumber: 2,
   loading: false
 }
 
@@ -41,9 +41,22 @@ const authReducer = (state = initalState, { type, payload }) => {
           ...state.loginData,
           [payload.field.name]: {
             ...state.loginData[payload.field.name],
-            value: payload.value
+            value: payload.value,
+            error: {
+              message: payload.errorMessage,
+              isError: !!payload.errorMessage
+            }
           }
-        }
+        },
+        loginErrorsNumber: (
+          !!payload.errorMessage
+          && !state.loginData[payload.field.name]?.error?.isError
+        ) ? state.loginErrorsNumber + 1
+          : (
+            !payload.errorMessage
+            && state.loginData[payload.field.name]?.error?.isError
+          ) ? state.loginErrorsNumber - 1
+            : state.loginErrorsNumber
       }
     default:
       return state
