@@ -4,10 +4,13 @@ import {
   , all
   , put
   , select
+  , throttle
 } from 'redux-saga/effects'
+import Validator from '../validator'
 
 import {
   LOGIN,
+  VALIDATE_FIELD
 } from '../actions/types'
 import { authenApiNames, authenApis } from '../apis'
 import apiExecutor from 'root/api'
@@ -28,8 +31,25 @@ function* loginSagas(action = {}) {
   }
 }
 
+function* validateField (action = {}) {
+  const { payload = {} } = action
+  const { field, value } = payload
+  const { validators = [] } = field
+  let message = null, isError = false
+  for (const validator of validators) {
+    const checkValidateRes = Validator[validator.key](value, ...(validator.params || []))
+    if (checkValidateRes !== true) {
+      message = checkValidateRes
+      isError = true
+      break;
+    }
+  }
+  yield put({ type: Utils.makeSagasActionType(VALIDATE_FIELD).SUCCESS, payload: { field, error: { isError, message } } || {} })
+}
+
 export default function* authWatchers() {
   yield all([
-    takeLatest(LOGIN, loginSagas)
+    takeLatest(LOGIN, loginSagas),
+    throttle(1000, VALIDATE_FIELD, validateField)
   ])
 }

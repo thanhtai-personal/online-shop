@@ -2,10 +2,8 @@ import {
   LOGIN,
   SIGNUP,
   UPDATE_LOGIN_INPUT,
+  VALIDATE_FIELD
 } from './types'
-
-import Validator from '../models/validator'
-import validator from '../models/validator'
 
 export const login = () => {
   return {
@@ -27,17 +25,15 @@ export const register = (data) => {
 }
 
 export const updateField = (field, value) => {
-  const { validators = [] } = field
-  let errorMessage = null
-  for (const validator of validators) {
-    const checkValidateRes = Validator[validator.key](value, ...(validator.params || []))
-    if (checkValidateRes !== true) {
-      errorMessage = checkValidateRes
-      break;
-    }
-  }
   return {
     type: UPDATE_LOGIN_INPUT,
-    payload: { field, value, errorMessage }
+    payload: { field, value }
+  }
+}
+
+export const validateField = (field, value) => {
+  return {
+    type: VALIDATE_FIELD,
+    payload: { field, value }
   }
 }

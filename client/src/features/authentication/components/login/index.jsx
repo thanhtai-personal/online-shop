@@ -5,15 +5,17 @@ import LoginView from './presentation'
 import {
   login,
   googleLogin,
-  updateField
+  updateField,
+  validateField
 } from './../../actions'
 
 const LoginComponent = (props) => {
 
   const { googleLogin = () => {}
     , login = () => {}
-    , updateField = () => {},
-    loading, loginData, errorsNumber
+    , updateField = () => {}
+    , validateField = () => {}
+    , loading, formError
   } = props
   
   const handleLogin = useCallback((e) => {
@@ -27,28 +29,27 @@ const LoginComponent = (props) => {
 
   const handleUpdateField = useCallback((field, e) => {
     updateField(field, e?.target?.value)
-  }, [updateField])
-
+    validateField(field, e?.target?.value)
+  }, [updateField, validateField])
   return (<LoginView
     onLogin={handleLogin}
     onGoogleLogin={handleGoogleLogin}
     onUpdateField={handleUpdateField}
     loading={loading}
-    loginData={loginData}
-    errorsNumber={errorsNumber}
+    formError={formError}
   />)
 }
 
 const mapState = ({ authentication = {} }) => ({
   loading: authentication.loading,
-  loginData: authentication.loginData,
-  errorsNumber: authentication.loginErrorsNumber
+  formError: authentication.loginFormError
 })
 
 const mapDispatch = {
   login,
   googleLogin,
-  updateField
+  updateField,
+  validateField,
 }
 
 export default connect(mapState, mapDispatch)(LoginComponent)

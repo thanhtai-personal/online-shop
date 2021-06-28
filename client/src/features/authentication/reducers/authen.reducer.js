@@ -1,6 +1,7 @@
 import {
   LOGIN,
   UPDATE_LOGIN_INPUT,
+  VALIDATE_FIELD
 } from '../actions/types'
 import actionHelpers from 'root/globalHelpingTools/actionHelpers'
 import loginModel from './../models/login.model'
@@ -11,8 +12,17 @@ const {
 const initalState = {
   loginData: loginModel,
   currentUser: {},
-  loginErrorsNumber: 2,
-  loading: false
+  loading: false,
+  loginFormError: {
+    userName: {
+      isError: true,
+      message: ''
+    },
+    password: {
+      isError: true,
+      message: ''
+    }
+  }
 }
 
 const authReducer = (state = initalState, { type, payload }) => {
@@ -42,17 +52,15 @@ const authReducer = (state = initalState, { type, payload }) => {
           [payload.field.name]: {
             ...state.loginData[payload.field.name],
             value: payload.value,
-            error: {
-              message: payload.errorMessage,
-              isError: !!payload.errorMessage
-            }
           }
-        },
-        errorData: {
-          ...state.errorData,
-          [payload.field.name]: {
-            
-          }
+        }
+      }
+    case makeSagasActionType(VALIDATE_FIELD).SUCCESS:
+      return {
+        ...state,
+        loginFormError: {
+          ...state.loginFormError,
+          [payload.field.name]: payload.error
         }
       }
     default:

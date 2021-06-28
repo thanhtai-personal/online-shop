@@ -77,7 +77,10 @@ export const LoginWrapper = styled.div`
           font-weight: bold;
           :hover {
             border-color: yellow;
-          },
+          }
+          :focus {
+            outline: none;
+          }
           .error {
             border: solid red 1px
           }

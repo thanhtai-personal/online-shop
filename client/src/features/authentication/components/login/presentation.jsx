@@ -7,7 +7,8 @@ import leftPanelImage from 'assets/images/left_bg.jpg'
 import { useCallback } from 'react'
 import loginModel from '../../models/login.model'
 import Loading from 'root/commonComponents/loading'
-import login from '.'
+import customHooks from './../customHooks'
+const { useFormErrorChecker } = customHooks
 
 const text = {
   userName: 'User name',
@@ -18,8 +19,10 @@ const text = {
 
 const LoginView = (props) => {
 
-  const { onLogin, onGoogleLogin, onUpdateField, loading, loginData = {}, errorsNumber = 0 } = props
-  const { userName, password } = loginData
+  const { onLogin, onGoogleLogin, onUpdateField, loading, formError = {} } = props
+  const { userName, password } = formError
+  let isFormError = useFormErrorChecker(formError)
+
 
   const handleChangeUserName = useCallback((e, data) => {
     onUpdateField(loginModel.userName, e, data)
@@ -39,15 +42,15 @@ const LoginView = (props) => {
         <form onSubmit={onLogin}>
           <label><h1>{text.login}</h1></label>
           <label>
-            <input className={userName?.error?.isError ? 'error' : ''} type='text' onChange={handleChangeUserName} name='name' placeholder={text.userName} />
+            <input className={userName?.isError ? 'error' : ''} type='text' onChange={handleChangeUserName} name='name' placeholder={text.userName} />
           </label>
-          {<span className={'error-message'}>{userName?.error?.message}</span>}
+          {<span className={'error-message'}>{userName?.message}</span>}
           <label>
-            <input className={password?.error?.isError ? 'error' : ''} type='text' onChange={handleChangePassword} name='password' placeholder={text.password} />
+            <input className={password?.isError ? 'error' : ''} type='text' onChange={handleChangePassword} name='password' placeholder={text.password} />
           </label>
-          <span className={'error-message'}>{password?.error?.message}</span>
+          <span className={'error-message'}>{password?.message}</span>
           <div className='actions'>
-            <input type='submit' className={errorsNumber > 0 ? 'disabled' : ''} disabled={errorsNumber > 0} value='Login' />
+            <input type='submit' className={isFormError > 0 ? 'disabled' : ''} disabled={isFormError} value='Login' />
             <button onClick={onGoogleLogin} >{text.googleLogin}</button>
           </div>
         </form>

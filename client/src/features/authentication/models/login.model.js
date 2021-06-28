@@ -1,10 +1,10 @@
-import { validatorKey } from './validator'
+import { validatorKey } from '../validator'
 
-const text = {
-  userNameMinLength: 'User name is required more than %s chracters',
-  userNameMaxLength: 'User name is required less than %s chracters',
-  passwordMinLength: 'Password is required more than %s chracters',
-  passwordMaxLength: 'Password is required less than %s chracters',
+let text = {
+  userNameMinLength: 'User name is required more than %s characters',
+  userNameMaxLength: 'User name is required less than %s characters',
+  passwordMinLength: 'Password is required more than %s characters',
+  passwordMaxLength: 'Password is required less than %s characters',
   userNameNoSpecialNoSpace: 'User name is required without special keys or spaces',
   passwordRequired: 'Password is required',
   userNameRequired: 'UserName is required'
@@ -25,11 +25,11 @@ const LoginModel = {
       },
       {
         key: validatorKey.minLength,
-        params: [text.userNameMinLength, 6]
+        params: [text.userNameMinLength.replace('%s', '8'), { lengthNumber: 8 }]
       },
       {
         key: validatorKey.maxLength,
-        params: [text.userNameMaxLength, 100]
+        params: [text.userNameMaxLength.replace('%s', '100'), { lengthNumber: 50 }]
       }
     ],
     error: {}
@@ -40,13 +40,13 @@ const LoginModel = {
     validators: [
       {
         key: validatorKey.minLength,
-        params: [text.passwordMinLength, { lengthNumber: 8 }]
+        params: [text.passwordMinLength.replace('%s', '8'), { lengthNumber: 8 }]
       }, {
         key: validatorKey.required,
         params: [text.passwordRequired]
       }, {
         key: validatorKey.maxLength,
-        params: [text.passwordMaxLength, { lengthNumber: 50 }]
+        params: [text.passwordMaxLength.replace('%s', '50'), { lengthNumber: 50 }]
       }
     ],
     error: {}
