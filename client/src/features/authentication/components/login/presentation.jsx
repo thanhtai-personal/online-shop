@@ -42,11 +42,11 @@ const LoginView = (props) => {
         <form onSubmit={onLogin}>
           <label><h1>{text.login}</h1></label>
           <label>
-            <input className={userName?.isError ? 'error' : ''} type='text' onChange={handleChangeUserName} name='name' placeholder={text.userName} />
+            <input className={userName?.isError ? 'error' : ''} type={'text'} onChange={handleChangeUserName} name='name' placeholder={text.userName} />
           </label>
           {<span className={'error-message'}>{userName?.message}</span>}
           <label>
-            <input className={password?.isError ? 'error' : ''} type='text' onChange={handleChangePassword} name='password' placeholder={text.password} />
+            <input type={'password'} className={password?.isError ? 'error' : ''} onChange={handleChangePassword} name='password' placeholder={text.password} />
           </label>
           <span className={'error-message'}>{password?.message}</span>
           <div className='actions'>
