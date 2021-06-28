@@ -84,6 +84,9 @@ export const LoginWrapper = styled.div`
         }
       }
       button {
+        :hover {
+          cursor: pointer; 
+        }
         width: 350px;
         height: 50px;
         margin-top: 10px;
@@ -104,6 +107,9 @@ export const LoginWrapper = styled.div`
         margin-top: 10px;
         border: solid 1px;
         border-radius: 25px;
+        :hover {
+          cursor: pointer; 
+        }
       }
       .actions {
         margin-top: 20px;
@@ -112,6 +118,12 @@ export const LoginWrapper = styled.div`
         justify-content: center;
         justify-items: center;
         align-items: center;
+      }
+      .disabled {
+        cursor: not-allowed !important;
+      }
+      .error-message {
+        color: red;
       }
     }
   }

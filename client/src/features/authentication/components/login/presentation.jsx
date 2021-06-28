@@ -18,7 +18,7 @@ const text = {
 
 const LoginView = (props) => {
 
-  const { onLogin, onGoogleLogin, onUpdateField, loading, loginData = { }, errorsNumber = 0 } = props
+  const { onLogin, onGoogleLogin, onUpdateField, loading, loginData = {}, errorsNumber = 0 } = props
   const { userName, password } = loginData
 
   const handleChangeUserName = useCallback((e, data) => {
@@ -33,27 +33,27 @@ const LoginView = (props) => {
     loginBackground={loginBgImage}
     leftPanelImage={leftPanelImage}
   >
-    {loading ? <Loading /> : <>
-      <div className={'left-panel'}></div>
-      <div className={'right-panel'}>
+    <div className={'left-panel'}></div>
+    <div className={'right-panel'}>
+      {loading ? <Loading /> :
         <form onSubmit={onLogin}>
           <label><h1>{text.login}</h1></label>
           <label>
             <input className={userName?.error?.isError ? 'error' : ''} type='text' onChange={handleChangeUserName} name='name' placeholder={text.userName} />
-            {<span className={'error-message'}>{userName?.error?.message}</span>}
           </label>
+          {<span className={'error-message'}>{userName?.error?.message}</span>}
           <label>
             <input className={password?.error?.isError ? 'error' : ''} type='text' onChange={handleChangePassword} name='password' placeholder={text.password} />
-            <span className={'error-message'}>{password?.error?.message}</span>
           </label>
+          <span className={'error-message'}>{password?.error?.message}</span>
           <div className='actions'>
-            <input type='submit' disabled={errorsNumber > 0} value='Login' />
+            <input type='submit' className={errorsNumber > 0 ? 'disabled' : ''} disabled={errorsNumber > 0} value='Login' />
             <button onClick={onGoogleLogin} >{text.googleLogin}</button>
           </div>
         </form>
-      </div>
-    </>}
-  </LoginWrapper>)
+      }
+    </div>
+  </LoginWrapper >)
 }
 
 export default LoginView

@@ -48,15 +48,12 @@ const authReducer = (state = initalState, { type, payload }) => {
             }
           }
         },
-        loginErrorsNumber: (
-          !!payload.errorMessage
-          && !state.loginData[payload.field.name]?.error?.isError
-        ) ? state.loginErrorsNumber + 1
-          : (
-            !payload.errorMessage
-            && state.loginData[payload.field.name]?.error?.isError
-          ) ? state.loginErrorsNumber - 1
-            : state.loginErrorsNumber
+        errorData: {
+          ...state.errorData,
+          [payload.field.name]: {
+            
+          }
+        }
       }
     default:
       return state

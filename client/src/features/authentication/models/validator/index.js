@@ -11,14 +11,13 @@ const regex = {
 
 const validator = {
   noSpaceNoSpecial: (value, message) => {
-    if (!regex.noSpaceNoSpecial.test(value)) {
+    if (regex.noSpaceNoSpecial.test(value)) {
       return message || text.noSpecialChar
     } else {
       return true
     }
   },
   minLength: (value = '', message, option) => {
-    console.log('option', option)
     const { lengthNumber } = option
     if (value.length < lengthNumber) return message || text.minLength.replace('%s', lengthNumber?.toString())
     else return true
@@ -29,7 +28,7 @@ const validator = {
     else return true
   },
   required: (value = '', message) => {
-    if (value.value.trim().length === 0) return message || text.required
+    if (value.trim().length === 0) return message || text.required
     else return true
   }
 }

@@ -30,7 +30,7 @@ export const updateField = (field, value) => {
   const { validators = [] } = field
   let errorMessage = null
   for (const validator of validators) {
-    const checkValidateRes = Validator[validator.key](field, ...(validator.params || []))
+    const checkValidateRes = Validator[validator.key](value, ...(validator.params || []))
     if (checkValidateRes !== true) {
       errorMessage = checkValidateRes
       break;

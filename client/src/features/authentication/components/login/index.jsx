@@ -17,6 +17,7 @@ const LoginComponent = (props) => {
   } = props
   
   const handleLogin = useCallback((e) => {
+    e.preventDefault()
     login()
   }, [login])
 
@@ -38,10 +39,10 @@ const LoginComponent = (props) => {
   />)
 }
 
-const mapState = ({ login = {} }) => ({
-  loading: login.loading,
-  loginData: login.loginData,
-  errorsNumber: login.loginErrorsNumber
+const mapState = ({ authentication = {} }) => ({
+  loading: authentication.loading,
+  loginData: authentication.loginData,
+  errorsNumber: authentication.loginErrorsNumber
 })
 
 const mapDispatch = {
