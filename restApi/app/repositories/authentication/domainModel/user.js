@@ -75,6 +75,4 @@ UserRepository.init({
   sequelize
 })
 
-const userRepository = new UserRepository()
-
-module.exports = userRepository
+module.exports = UserRepository 

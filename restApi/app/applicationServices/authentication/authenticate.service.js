@@ -48,13 +48,12 @@ class AuthenticateService {
       }
       if (isValidPass) {
         const token = await this.generateToken(user)
-        const refreshToken = await this._clientService.generateRefreshToken(user, dataReq.userAgent, REFRESH_TOKEN_EXPIRED_TIME)
         const role = await this._roleService.findOne({
           where: {
             id: user.roleId
           }
         }) || {}
-        return { user: userView, token, refreshToken, role: role.name }
+        return { user: userView, token, role: role.name }
       } else return {
         message: 'invalid password!'
       }

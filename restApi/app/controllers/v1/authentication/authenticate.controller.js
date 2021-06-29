@@ -21,7 +21,7 @@ class AuthenticateController {
       } else {
         const dataReq = {
           ...req.body,
-          username: req.body.username || req.body.email,
+          username: req.body.userName || req.body.email,
           userAgent: req.headers['user-agent'],
           lastLoginTime: new Date()
         }

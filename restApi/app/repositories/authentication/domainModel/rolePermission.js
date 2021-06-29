@@ -35,6 +35,5 @@ RolePermission.init({
   sequelize
 })
 
-const rolePermissionRepository = new RolePermission()
 
-module.exports =  rolePermissionRepository
+module.exports =  RolePermission

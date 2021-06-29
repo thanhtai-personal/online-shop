@@ -32,6 +32,4 @@ Permission.init({
   sequelize
 })
 
-const permissionRepository = new Permission()
-
-module.exports =  permissionRepository
+module.exports =  Permission

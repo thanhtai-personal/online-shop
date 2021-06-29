@@ -51,6 +51,4 @@ Role.init({
 })
 
 
-const roleRepository = new Role()
-
-module.exports =  roleRepository
+module.exports =  Role

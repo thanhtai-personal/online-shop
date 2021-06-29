@@ -47,7 +47,4 @@ GoogleAccount.init({
   sequelize, modelName: 'googleAccount', tableName: 'googleaccount'
 })
 
-
-const googleAccountRepository = new GoogleAccount()
-
-module.exports =  googleAccountRepository
+module.exports =  GoogleAccount

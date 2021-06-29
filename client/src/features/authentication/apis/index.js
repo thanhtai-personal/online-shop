@@ -6,10 +6,10 @@ export const authenApiNames = {
 export const authenApis = {
   [authenApiNames.login]: {
     method: 'post',
-    path: '/login',
+    path: '/v1/authen/login',
   },
   [authenApiNames.signup]: {
     method: 'post',
-    path: '/register',
+    path: '/v1/authen/register',
   }
 }

@@ -5,7 +5,12 @@ const application = express();
 const bodyParser = require('body-parser');
 const routeConfig = require('./route-config');
 const settingsConfig = require('./settings/settings-config');
-const compression = require('compression')
+const compression = require('compression');
+const cors = require('cors');
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200
+}
 
 function configureApplication(application) {
   application.use(bodyParser.json());
@@ -27,6 +32,8 @@ function configureApplication(application) {
     // fallback to standard filter function
     return compression.filter(req, res)
   } }))
+  //use cores
+  application.use(cors(corsOptions))
 }
 
 function configureRoutes(application) {

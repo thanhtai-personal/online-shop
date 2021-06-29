@@ -1,7 +1,10 @@
-import { useMemo } from "react"
+import { useState, useEffect } from 'react'
 
-const useFormErrorChecker = (formError = {}) => {
-  return useMemo(() => {
+const useFormErrorChecker = ({ ...formError }) => {
+  const formErrorObj = { ...formError }
+  const [isFormError, setIsFormError] = useState(false)
+
+  useEffect(() => {
     let isError = false
     for (let key of Object.keys(formError)) {
       if (formError[key]?.isError) {
@@ -9,8 +12,9 @@ const useFormErrorChecker = (formError = {}) => {
         break
       }
     }
-    return isError
-  }, [formError])
+    setIsFormError(isError)
+  }, [formErrorObj])
+  return isFormError
 }
 
 export default useFormErrorChecker
