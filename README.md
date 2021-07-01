@@ -21,9 +21,9 @@ Run script:\
 to run server:\
   cd restApi\
   npm install\
-  npm start\
+  npm start
 
 to run client:\ 
   cd client\
   npm install\
-  npm start\
+  npm start
