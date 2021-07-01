@@ -2,11 +2,11 @@
 ![Full stack source struct](https://github.com/thanhtai-personal/my-pratice/blob/main/my-practice-struct.jpg?raw=true)
 # How to run:
 to run server: 
-  cd restApi
-  npm install
-  npm start
+  cd restApi \n
+  npm install \n
+  npm start \n
 
 to run client: 
-  cd client
-  npm install
-  npm start
+  cd client \n
+  npm install \n
+  npm start \n
