@@ -2,7 +2,7 @@
 ![Full stack source struct](https://github.com/thanhtai-personal/my-pratice/blob/main/my-practice-struct.jpg?raw=true)
 # How to run:
 to run database:\
-  Create a .env file in /restApi folder with sample content:\
+  Create a .env file in /restApi folder with sample content:
 
 ```
 DATABASE_URL=postgres://<postgres user>:<password>@localhost:5432/<database name>
@@ -15,7 +15,7 @@ PASSWORD=<postgres password>
 
 Run script:\
   create database: npm run create-dev-tables\
-  migrate database: npm run migrate-tables\
+  migrate database: npm run migrate-tables
   
 
 to run server:\
