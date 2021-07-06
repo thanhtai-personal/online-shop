@@ -38,7 +38,18 @@ function loadRouteConfig() {
 }
 
 function loadController(routeItem) {
-  var controller;
+  let controller;
+  const services = []
+  if(routeItem && routeItem.services) {
+    try {
+      for (service of routeItem.services) {
+        let _service = require(service);
+        services.push(_service)
+      }
+    } catch(e) {
+      throw 'Undefined "service" property in "lib/config/route.config.json:": ' + e;  
+    }
+  }
 
   if(!routeItem || !routeItem.controller) {
     throw 'Undefined "controller" property in "lib/config/route.config.json"';
@@ -51,7 +62,7 @@ function loadController(routeItem) {
     throw 'Unable to load ' + routeItem.controller + ": " + e;
   }
 
-  return controller;
+  return new controller(...services);
 }
 
 function getRoute(routeItem) {

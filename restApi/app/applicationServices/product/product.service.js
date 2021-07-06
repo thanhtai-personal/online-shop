@@ -1,5 +1,5 @@
 const BaseService = require('../base.service')
-const ProductRepo = require('./../../repositories/product/services/product.service')
+const ProductRepoService = require('./../../repositories/product/services/product.service')
 const CategoryService = require('./../../repositories/product/services/category.service')
 const OrderService = require('./../../repositories/product/services/order.service')
 const ProductCategoryService = require('./../../repositories/product/services/productCategory.service')
@@ -18,7 +18,7 @@ class ProductService extends BaseService {
     imageService
   ) {
     super(userService, roleService)
-    this._productService = productService || ProductRepo
+    this._productService = productService || ProductRepoService
     this._categoryService = categoryService || CategoryService
     this._orderService = orderService || OrderService
     this._productCategoryService = productCategoryService || ProductCategoryService

@@ -1,4 +1,4 @@
-const User = require('../domainModel/user')
+const User = require('../models/user')
 
 User.getByUserName = async (username, getPassword) => {
   const user = await User.findOne({
