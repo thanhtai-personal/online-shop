@@ -1,22 +1,43 @@
 
-const createReferenceKey = async (isEnd = false) => {
+const createReferenceKey = async (pool, isEnd = false) => {
   console.log('createReferenceKey start')
-  const createReferenceKeyQueryResource = `ALTER TABLE resource 
-  ADD CONSTRAINT fkey_resource_google_account FOREIGN KEY ("accountId")
-    REFERENCES googleaccount (id) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION,
-  ADD CONSTRAINT fkey_resource_user FOREIGN KEY ("userId")
-    REFERENCES "user" (id) MATCH SIMPLE
+  const userRole = `ALTER TABLE "user" ADD CONSTRAINT 
+    fkey_user_role FOREIGN KEY ("role")
+    REFERENCES "role" (id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION`
-  const createReferenceKeyQueryGoogleAccount = `ALTER TABLE googleaccount ADD CONSTRAINT fkey_googleaccount_user FOREIGN KEY ("userId")
-    REFERENCES "user" (id) MATCH SIMPLE
+  const productCategoryProduct = `ALTER TABLE "product_category" ADD CONSTRAINT 
+    fkey_product_category_product FOREIGN KEY ("productId")
+    REFERENCES "product" (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION`
+  const productCategoryCategory = `ALTER TABLE "product_category" ADD CONSTRAINT 
+    fkey_product_category_category FOREIGN KEY ("categoryId")
+    REFERENCES "category" (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION`
+  const orderProductProduct = `ALTER TABLE "order_product" ADD CONSTRAINT 
+    fkey_order_product_product FOREIGN KEY ("productId")
+    REFERENCES "product" (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION`
+  const orderProductOrder = `ALTER TABLE "order_product" ADD CONSTRAINT 
+    fkey_order_product_order FOREIGN KEY ("orderId")
+    REFERENCES "order" (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION`
+  const imageProduct = `ALTER TABLE "image" ADD CONSTRAINT 
+    fkey_image_product FOREIGN KEY ("productId")
+    REFERENCES "product" (id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION`
   try {
-    await pool.query(createReferenceKeyQueryResource)
-    await pool.query(createReferenceKeyQueryGoogleAccount)
+    await pool.query(userRole)
+    await pool.query(productCategoryProduct)
+    await pool.query(productCategoryCategory)
+    await pool.query(orderProductProduct)
+    await pool.query(orderProductOrder)
+    await pool.query(imageProduct)
     console.log('querry success')
     isEnd && pool.end()
   } catch (error) {
@@ -25,15 +46,23 @@ const createReferenceKey = async (isEnd = false) => {
   }
 }
 
-const dropReferenceKey = async (isEnd = false) => {
+const dropReferenceKey = async (pool, isEnd = false) => {
   console.log('dropReferenceKey start')
-  const dropReferenceKeyQueryResource = `ALTER TABLE IF EXISTS resource DROP CONSTRAINT IF EXISTS fkey_resource_event_note,
-  DROP CONSTRAINT IF EXISTS fkey_resource_google_account,
-  DROP CONSTRAINT IF EXISTS fkey_resource_user`
-  const dropReferenceKeyQueryGoogleAccount = `ALTER TABLE IF EXISTS googleaccount DROP CONSTRAINT IF EXISTS fkey_googleaccount_user`
+  const user = `ALTER TABLE IF EXISTS "user"
+    DROP CONSTRAINT IF EXISTS fkey_user_role`
+  const productCategory = `ALTER TABLE IF EXISTS "product_category"
+    DROP CONSTRAINT IF EXISTS fkey_product_category_product,
+    DROP CONSTRAINT IF EXISTS fkey_product_category_category`
+  const orderProduct = `ALTER TABLE IF EXISTS "order_product"
+    DROP CONSTRAINT IF EXISTS fkey_order_product_product,
+    DROP CONSTRAINT IF EXISTS fkey_order_product_order`
+  const image = `ALTER TABLE IF EXISTS "image"
+    DROP CONSTRAINT IF EXISTS fkey_image_product`
   try {
-    await pool.query(dropReferenceKeyQueryResource)
-    await pool.query(dropReferenceKeyQueryGoogleAccount)
+    await pool.query(user)
+    await pool.query(productCategory)
+    await pool.query(orderProduct)
+    await pool.query(image)
     console.log('querry success')
     isEnd && pool.end()
   } catch (error) {

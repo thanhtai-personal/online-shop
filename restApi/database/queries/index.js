@@ -9,7 +9,7 @@ const orderProductQuery = require('./orderProduct')
 const imageQuery = require('./images')
 const referenceQuery = require('./references')
 
-module.exports =  {
+module.exports = {
   /**
    * DB Query
    * @param {object} req
@@ -30,6 +30,6 @@ module.exports =  {
   queries: [userQuery, roleQuery, categoryQuery
     , productQuery, orderQuery, productCategoryQuery
     , orderProductQuery, imageQuery
-    , referenceQuery //referenceQuery alway be at last item
-  ] 
+  ],
+  referenceQueries: [referenceQuery]
 };
