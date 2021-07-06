@@ -8,11 +8,11 @@ class AuthenticateController extends BaseController {
   }
 
   login = async (req, res) => {
-    res.status(200).send(authData)
+    res.status(200).send('test data')
   }
 
   signUp = async (req, res) => {
-    res.status(200).send(authData)
+    res.status(200).send('test data')
   }
 
   test = async (req, res) => {

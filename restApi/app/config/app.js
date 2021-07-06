@@ -5,35 +5,16 @@ const application = express();
 const bodyParser = require('body-parser');
 const routeConfig = require('./route-config');
 const settingsConfig = require('./settings/settings-config');
-const compression = require('compression');
-const cors = require('cors');
-const corsOptions = {
-  origin: 'http://localhost:3000',
-  optionsSuccessStatus: 200
-}
+const middleWares = require('./../middlewares')
+
 
 function configureApplication(application) {
   application.use(bodyParser.json());
 
-  application.use(function(req, res, next) {
-    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.set('Pragma', 'no-cache');
-    res.set('Expires', '0');
-    res.type('application/json');
-    next();
-  });
-  // Use gzip compression
-  application.use(compression({ filter: (req, res) => {
-    if (req.headers['x-no-compression']) {
-      // don't compress responses with this request header
-      return false
-    }
-   
-    // fallback to standard filter function
-    return compression.filter(req, res)
-  } }))
-  //use cores
-  application.use(cors(corsOptions))
+  //custom middlewares
+  for (let middleWare of middleWares) {
+    application.use(middleWare)
+  }
 }
 
 function configureRoutes(application) {

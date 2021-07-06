@@ -1,22 +1,18 @@
 {
   "routes": [
     {
-      "route": "/v1/authen/test",
-      "method": "GET",
-      "controller": "../controllers/v1/authen/authenticate.controller",
-      "action": "test"
-    },
-    {
       "route": "/v1/authen/login",
       "method": "POST",
       "controller": "../controllers/v1/authen/authenticate.controller",
-      "action": "login"
+      "action": "login",
+      "key": "login"
     },
     {
       "route": "/v1/authen/register",
       "method": "POST",
       "controller": "../controllers/v1/authen/authenticate.controller",
-      "action": "register"
+      "action": "register",
+      "key": "register"
     }
   ]
 }
