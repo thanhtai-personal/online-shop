@@ -1,34 +1,11 @@
-const { DataTypes, Model } = require('sequelize');
-const { sequelize } = require('./../../../sequelize')
+const { DataTypes } = require('sequelize');
+const createModel = require('../../base.model')
 
-class Role extends Model { }
-
-Role.init({
-  id: {
-    type: DataTypes.UUID,
-    primaryKey: true
-  },
+const Role = createModel('role', 'role', {
   'name': {
     type: DataTypes.TEXT,
   },
-  'createdAt': {
-    type: DataTypes.TIME
-  },
-  'updatedAt': {
-    type: DataTypes.TIME
-  },
-  'isActive': {
-    type: DataTypes.BOOLEAN
-  },
-  'createdBy': {
-    type: DataTypes.UUID
-  },
-  'updatedBy': {
-    type: DataTypes.UUID
-  }
 }, {
-  modelName: 'role',
-  tableName: 'role',
   hooks: {
     beforeCreate: async (role, options) => {
       if ((role.get('name') || '').toLowerCase() === 'superadmin') {
@@ -44,11 +21,8 @@ Role.init({
         sequelize.Promise.reject('Cannot update role to be a supper admin')
         throw new Error('Cannot update role to be a super admin')
       }
-    },
-
-  },
-  sequelize
+    }
+  }
 })
 
-
-module.exports =  Role
+module.exports = Role
