@@ -8,11 +8,25 @@ class AuthenticateController extends BaseController {
   }
 
   login = async (req, res) => {
-    res.status(200).send('test data')
+    const dataReq = req.body
+    let reponse = null
+    if (dataReq.userName) {
+      reponse = await this._authService.loginByUserName()
+    } else if (dataReq.email) {
+      reponse = await this._authService.loginByEmail()
+    }
+    res.status(200).send(reponse)
   }
 
   signUp = async (req, res) => {
-    res.status(200).send('test data')
+    const dataReq = req.body
+    let reponse = null
+    if (dataReq.userName) {
+      reponse = await this._authService.registerByUserName()
+    } else if (dataReq.email) {
+      reponse = await this._authService.registerByEmail()
+    }
+    res.status(200).send(reponse)
   }
 
   test = async (req, res) => {

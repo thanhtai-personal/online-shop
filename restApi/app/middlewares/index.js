@@ -1,10 +1,12 @@
-const authenApi = require('./authenApi')
-const gZip = require('./gzip')
-const cacheMiddleware = require('./cache')
-const cors = require('./cors')
+const useAuthen = require('./authenApi')
+const useGZip = require('./gzip')
+const useCache = require('./cache')
+const useCors = require('./cors')
+const useErrorCatcher = require('./errorCatcher')
 module.exports = [
-  cors,
-  gZip,
-  cacheMiddleware,
-  authenApi
+  useCors,
+  useGZip,
+  useCache,
+  useAuthen,
+  useErrorCatcher
 ]
