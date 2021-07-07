@@ -25,6 +25,126 @@ class ProductService extends BaseService {
     this._orderProductService = orderProductService || OrderProductService
     this._imageService = imageService || ImageService
   }
+
+  addOrEdit = async (dataReq) => {
+    const { authData, images = [], ...nestedData} = dataReq
+    const product = await this._productService.create({
+      ...nestedData,
+      createdBy: authData.user?.id,
+      updatedBy: authData.user?.id,
+      createdTime: new Date(),
+      updatedTime: new Date(),
+    })
+    for (let image of images) {
+      await this._imageService.create({
+        productId: product.id,
+        altName: image.name,
+        url: image.src,
+        createdBy: authData.user?.id,
+        updatedBy: authData.user?.id,
+        createdTime: new Date(),
+        updatedTime: new Date(),
+      })
+    }
+    return { product, images }
+  }
+
+  addOrEditCategory = async (dataReq) => {
+    const { authData, ...nestedData } = dataReq
+    return await this._categoryService.create({
+      ...nestedData,
+      createdBy: authData.user?.id,
+      updatedBy: authData.user?.id,
+      createdTime: new Date(),
+      updatedTime: new Date(),
+    })
+  }
+
+  addOrEditOrder = async (dataReq) => {
+    const { authData, products, ...nestedData } = dataReq
+    const order = await this._orderService.create({
+      ...nestedData,
+      createdBy: authData.user?.id,
+      updatedBy: authData.user?.id,
+      createdTime: new Date(),
+      updatedTime: new Date(),
+    })
+    for (let product of products) {
+      await this._orderProductService.create({
+        productId: product.id,
+        orderId: order.id,
+        quantity: product.quantity,
+        createdBy: authData.user?.id,
+        updatedBy: authData.user?.id,
+        createdTime: new Date(),
+        updatedTime: new Date(),
+      })
+    }
+    return order
+  }
+
+  searchProducts = async (dataReq) => {
+    const { query, take, skip } = dataReq
+    let products = []
+    if (!query) {
+      products = this._productService.findAll({
+        limit: take,
+        offset: skip,
+        where: {
+          isActive: true
+        }
+      })
+    } else {
+      products = this._productService.findAll({
+        limit: take,
+        offset: skip,
+        where: {
+          [Op.or]: [{
+            name: {
+              [Op.like]: `%${query}%`
+            }
+          }, {
+            description: {
+              [Op.like]: `%${query}%`
+            }
+          }],
+          isActive: true
+        }
+      })
+    }
+    for (let idx in products) {
+      products[idx].images = await this._imageService.findAll({
+        isActive: true,
+        productId: products[idx].id
+      })
+    }
+    return products
+  }
+
+  getCategory = async (dataReq) => {
+    return await this._categoryService.findAll({
+      where: {
+        isActive: true
+      }
+    })
+  }
+
+  searchOrders = async (dataReq) => {
+    return await this._orderService.findAll({
+      where: {
+        isActive: true
+      }
+    })
+  }
+
+  searchOrdersByUser = async (dataReq) => {
+    return await this._orderService.findAll({
+      where: {
+        isActive: true,
+        createdBy: dataReq.authData.user.id
+      }
+    })
+  }
 }
 
 module.exports = ProductService;
