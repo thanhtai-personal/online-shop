@@ -2,15 +2,12 @@
 const JWT = require('jsonwebtoken')
 const { Op } = require('sequelize')
 const {
-  LOGIN = '/login'
-  , REGISTER = '/register'
+  publicRoutes,
+  adminRoutes,
 } = require('./../config/routePaths')
 const userService = require('./../repositories/authen/services/user.service')
 const roleService = require('./../repositories/authen/services/role.service')
 const { jwtKey } = require('./../../env')
-
-const publicRoutes = [LOGIN, REGISTER]
-const adminRoutes = []
 
 const useAuth = async (req, res, next) => {
   try {

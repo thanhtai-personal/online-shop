@@ -5,14 +5,72 @@
       "method": "POST",
       "controller": "../controllers/v1/authen/authenticate.controller",
       "action": "login",
-      "key": "login"
+      "key": "login",
+      "isPublic": true
     },
     {
       "route": "/v1/authen/register",
       "method": "POST",
       "controller": "../controllers/v1/authen/authenticate.controller",
       "action": "register",
-      "key": "register"
+      "key": "register",
+      "isPublic": true
+    },
+    {
+      "route": "/v1/product/add-or-edit",
+      "method": "POST",
+      "controller": "../controllers/v1/product/product.controller",
+      "action": "addOrEdit",
+      "key": "addOrEditProduct",
+      "isAdmin": true
+    },
+    {
+      "route": "/v1/product/add-or-edit-category",
+      "method": "POST",
+      "controller": "../controllers/v1/product/product.controller",
+      "action": "addOrEditCategory",
+      "key": "addOrEditCategory",
+      "isAdmin": true
+    },
+    {
+      "route": "/v1/product/add-or-edit-order",
+      "method": "POST",
+      "controller": "../controllers/v1/product/product.controller",
+      "action": "addOrEditOrder",
+      "key": "addOrEditOrder",
+      "isPublic": true
+    },
+    {
+      "route": "/v1/product/search",
+      "method": "POST",
+      "controller": "../controllers/v1/product/product.controller",
+      "action": "search",
+      "key": "searchProducts",
+      "isPublic": true
+    },
+    {
+      "route": "/v1/product/get-categories",
+      "method": "GET",
+      "controller": "../controllers/v1/product/product.controller",
+      "action": "getCategories",
+      "key": "getCategories",
+      "isPublic": true
+    },
+    {
+      "route": "/v1/product/get-orders",
+      "method": "GET",
+      "controller": "../controllers/v1/product/product.controller",
+      "action": "searchOrders",
+      "key": "searchOrders",
+      "isAdmin": true
+    },
+    {
+      "route": "/v1/product/get-orders-by-user",
+      "method": "GET",
+      "controller": "../controllers/v1/product/product.controller",
+      "action": "getOrdersByUser",
+      "key": "getOrdersByUser",
+      "isPublic": true
     }
   ]
 }
