@@ -42,8 +42,6 @@ export default {
   // `headers` are custom headers to be sent
   headers: { 
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Access-Control-Allow-Origin': '*',
   },
 
   // `params` are the URL parameters to be sent with the request

@@ -1,10 +1,10 @@
-const BaseController = require('./../base.controller ')
+const BaseController = require('./../base.controller')
 const ProductService = require('./../../../applicationServices/product/product.service')
 
 class ProductController extends BaseController {
   constructor(productService) {
     super()
-    this._productService = productService || ProductService
+    this._productService = productService || new ProductService()
   }
 
   addOrEdit = async (req, res) => {

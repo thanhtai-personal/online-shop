@@ -9,8 +9,8 @@ const defaultRoutes = [
    * Mean is data of route(reducer, api, sagas) in store will be loaded from building time.
    */
   {
-    key: 'home',
-    path: '/',
+    key: 'admin',
+    path: '/dashboard',
     isExact: true,
     component: LoginContainer,
     hocs: [],
@@ -27,19 +27,10 @@ const defaultRoutes = [
     unsetFeature: unsetFeature,
   },
   {
-    key: 'signup',
-    path: '/signup',
+    key: 'home',
+    path: '/',
     isExact: true,
-    component: RegisterContainer,
-    hocs: [],
-    setUpStore: setUpFeature,
-    unsetFeature: unsetFeature,
-  },
-  {
-    key: 'register',
-    path: '/register',
-    isExact: true,
-    component: RegisterContainer,
+    component: LoginContainer,
     hocs: [],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
