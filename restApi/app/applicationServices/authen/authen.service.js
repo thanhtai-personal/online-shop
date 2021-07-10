@@ -2,6 +2,7 @@ const BaseService = require('../base.service')
 const Config = require('./configData.json')
 const jwt = require('jsonwebtoken')
 const { jwtKey } = require('./../../../env')
+const bcrypt = require('bcryptjs')
 
 class AuthenticateService extends BaseService {
   constructor (
