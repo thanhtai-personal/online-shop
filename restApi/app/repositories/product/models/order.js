@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 const createModel = require('../../base.model')
 
-const Order = createModel('order', 'order', {
+class ImageModel extends Model {}
+
+const Order = createModel(ImageModel, 'order', 'order', {
   'status': {
     type: DataTypes.TEXT,
   }

@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 const createModel = require('../../base.model')
 
-const ProductCategory = createModel('productCategory', 'product_category', {
+class ProductCategoryModel extends Model {}
+
+const ProductCategory = createModel(ProductCategoryModel, 'productCategory', 'product_category', {
   'productId': {
     type: DataTypes.UUID,
   },

@@ -1,11 +1,9 @@
-const { DataTypes, Model } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const { sequelize } = require('./../sequelize')
 
-class BaseModel extends Model { }
-
-const createModel = (modelName, tableName, extendsProperties = {}, option = {}) => {
+const createModel = (Model, modelName, tableName, extendsProperties = {}, option = {}) => {
   const { hooks, ...nestedOption } = option
-  return BaseModel.init({
+  return Model.init({
     id: {
       type: DataTypes.UUID,
       primaryKey: true

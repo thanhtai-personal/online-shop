@@ -1,10 +1,12 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 const bcrypt = require('bcryptjs')
 const { saltPrefix } = require('../../../../env')
 const { v4: uuidv4, validate: uuidValidate } = require('uuid')
 const createModel = require('../../base.model')
 
-const UserModel = createModel('user', 'user', {
+class UserModel extends Model {}
+
+const User = createModel(UserModel, 'user', 'user', {
   'name': {
     type: DataTypes.TEXT,
   },
@@ -50,4 +52,4 @@ const UserModel = createModel('user', 'user', {
   }
 })
 
-module.exports = UserModel 
+module.exports = User 
