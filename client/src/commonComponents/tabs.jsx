@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { TabsStyled } from './tabs.styled'
 
-const Tabs = ({ buttons, isVertical }) => {
+const Tabs = (props) => {
+  const { buttons, isVertical, tabKey } = props
   const [activeBtn, setActiveBtn] = useState(0)
 
   return (<TabsStyled isVertical={isVertical}>
-    {buttons.map((button, idx) => (<div className={`tab-btn-wrapper ${idx === activeBtn ? 'active' : ''}`}>
+    {buttons.map((button, idx) => (<div key={`${tabKey}-tab-${idx}`} className={`tab-btn-wrapper ${idx === activeBtn ? 'active' : ''}`}>
       {button}
     </div>))}
   </TabsStyled>)

@@ -16,7 +16,7 @@ const text = {
   userName: 'User name',
   password: 'Password',
   googleLogin: 'Login via Google',
-  login: 'Login',
+  login: 'Login form',
 }
 
 const LoginView = (props) => {
@@ -46,7 +46,7 @@ const LoginView = (props) => {
     <div className={'right-panel'}>
       {loading ? <Loading /> :
         <div className={'form'}>
-          <Tabs buttons={[
+          <Tabs tabKey={'login-form'} buttons={[
             <button>{text.login}</button>,
             <GoogleLogin
               clientId='404281480421-lbrm3qknrffqpndu06u4925047tt4ee3.apps.googleusercontent.com'

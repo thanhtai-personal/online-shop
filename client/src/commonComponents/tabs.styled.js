@@ -14,7 +14,7 @@ export const TabsStyled = styled.div`
       border: none;
       border-right: solid 1px;
       background-color: transparent !important;
-      color: ${(props) => props.textColor || 'yellow'} !important;
+      color: ${(props) => props.textColor || 'white'} !important;
       cursor: pointer;
       font-weight: bold !important;
       font-size: 16px !important;
@@ -22,6 +22,9 @@ export const TabsStyled = styled.div`
     cursor: pointer;
   }
   .active {
-    background-color: ${(props) => props.activeBgColor || 'red'};   
+    button {
+      color: ${(props) => props.activeTextColor || 'black'} !important;
+    }
+    background-color: ${(props) => props.activeBgColor || 'transparent'};   
   }
 `
