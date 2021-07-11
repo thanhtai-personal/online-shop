@@ -14,6 +14,7 @@ class AuthenticateService extends BaseService {
 
   login = async (dataReq) => {
     const user = await this._userService.findOne({
+      raw: true,
       attributes: ['id', 'name', 'userName', 'password', 'role'],
       where: {
         userName: dataReq.userName,
@@ -33,6 +34,7 @@ class AuthenticateService extends BaseService {
     }
     if (isValidPass) {
       const role = await this._roleService.findOne({
+        raw: true,
         where: {
           id: user.role,
           isActive: true
@@ -47,6 +49,7 @@ class AuthenticateService extends BaseService {
 
   loginByEmail = async (dataReq) => {
     const user = await this._userService.findOne({
+      raw: true,
       attributes: ['id', 'name', 'email', 'role', 'socialId'],
       where: {
         email: dataReq.email,
@@ -55,6 +58,7 @@ class AuthenticateService extends BaseService {
     })
     if (!user) return await this.register(dataReq)
     const role = await this._roleService.findOne({
+      raw: true,
       where: {
         id: user.role,
         isActive: true
@@ -66,6 +70,7 @@ class AuthenticateService extends BaseService {
 
   register = async (dataReq) => {
     const roleClient = await this._roleService.findOne({
+      raw: true,
       where: {
         isActive: true,
         name: 'client'

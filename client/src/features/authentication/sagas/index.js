@@ -1,4 +1,5 @@
 import Utils from 'root/globalHelpingTools/utils'
+import { adminRoles } from 'root/globalHelpingTools/constants'
 import {
   takeLatest
   , all
@@ -25,7 +26,14 @@ function* loginSagas(action = {}) {
   try {
     const { method, path } = authenApis[authenApiNames.login]
     const responseData = yield apiExecutor[method](path, requestData).then(response => response)
-    yield put({ type: Utils.makeSagasActionType(LOGIN).SUCCESS, payload: responseData?.data || {} })
+    const authData = responseData?.data || {}
+    yield put({ type: Utils.makeSagasActionType(LOGIN).SUCCESS, payload: authData })
+    const { role } = authData
+    if (adminRoles.includes(role)) {
+      window.location.replace('/admin')
+    } else {
+      window.location.replace('/home')
+    }
   } catch (error) {
     yield put({ type: Utils.makeSagasActionType(LOGIN).FAILED, payload: error || {} })
   }

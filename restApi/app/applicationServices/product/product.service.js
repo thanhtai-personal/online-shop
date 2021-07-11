@@ -88,6 +88,7 @@ class ProductService extends BaseService {
     let products = []
     if (!query) {
       products = this._productService.findAll({
+        raw: true,
         limit: take,
         offset: skip,
         where: {
@@ -96,6 +97,7 @@ class ProductService extends BaseService {
       })
     } else {
       products = this._productService.findAll({
+        raw: true,
         limit: take,
         offset: skip,
         where: {
@@ -114,8 +116,11 @@ class ProductService extends BaseService {
     }
     for (let idx in products) {
       products[idx].images = await this._imageService.findAll({
-        isActive: true,
-        productId: products[idx].id
+        raw: true,
+        where: {
+          isActive: true,
+          productId: products[idx].id
+        }
       })
     }
     return products
@@ -123,6 +128,7 @@ class ProductService extends BaseService {
 
   getCategory = async (dataReq) => {
     return await this._categoryService.findAll({
+      raw: true,
       where: {
         isActive: true
       }
@@ -131,6 +137,7 @@ class ProductService extends BaseService {
 
   searchOrders = async (dataReq) => {
     return await this._orderService.findAll({
+      raw: true,
       where: {
         isActive: true
       }
@@ -139,6 +146,7 @@ class ProductService extends BaseService {
 
   searchOrdersByUser = async (dataReq) => {
     return await this._orderService.findAll({
+      raw: true,
       where: {
         isActive: true,
         createdBy: dataReq.authData.user.id

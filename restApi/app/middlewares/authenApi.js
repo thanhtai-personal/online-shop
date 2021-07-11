@@ -15,12 +15,14 @@ const useAuth = async (req, res, next) => {
     else {
       const decodedToken = JWT.verify(req.token, jwtKey)
       const user = await userService.findOne({
+        raw: true,
         where: {
           [Op.or]: [{ userName: decodedToken.username }
             , { email: decodedToken.email }]
         }
       })
       const role = await roleService.findOne({
+        raw: true,
         where: {
           id: user?.role
         }
