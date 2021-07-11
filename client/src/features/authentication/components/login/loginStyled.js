@@ -39,94 +39,111 @@ export const LoginWrapper = styled.div`
     display: flex;
     justify-content: center;
     justify-items: center;
+    
     background-color: lightgreen;
     width: 50%;
     height: 100%;
     opacity: 0.8;
-    form {
+    .form {
+      .google-login-btn {
+        text-align: center !important;
+        justify-content: center;
+        div {
+          display: none !important;
+        }
+        span {
+          text-align: center;
+        }
+      }
       @media (max-width: 675px) {
         width: 90%;
       }
-      h1 {
-        font-weight: bold;
-        font-size: 24px;
-      }
+      display: flex;
+      width: 60%;
+      height: 60%;
       background-color: greenyellow;
       overflow-y: auto;
       overflow-x: hidden;
-      display: flex;
-      flex-flow: column wrap;
-      width: 60%;
-      height: 60%;
       margin-top: 20%;
-      justify-content: center;
-      justify-items: center;
-      text-align: center;
+      flex-flow: column;
       border: solid 2px black;
-      label {
+      form {
         width: 100%;
-        padding-top: 10px;
-        margin-top: 10px;
-        input {
-          width: 325px;
+        height: 100%;
+        h1 {
+          font-weight: bold;
+          font-size: 24px;
+        }
+        display: flex;
+        justify-content: center;
+        flex-flow: column wrap;
+        justify-items: center;
+        text-align: center;
+        label {
+          width: 100%;
+          padding-top: 10px;
+          margin-top: 10px;
+          input {
+            width: 325px;
+            height: 50px;
+            border: solid 1px;
+            border-radius: 25px;
+            padding-left: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            :hover {
+              border-color: yellow;
+            }
+            :focus {
+              outline: none;
+            }
+            .error {
+              border: solid red 1px
+            }
+          }
+        }
+        button {
+          :hover {
+            cursor: pointer; 
+          }
+          width: 350px;
           height: 50px;
+          margin-top: 10px;
           border: solid 1px;
           border-radius: 25px;
-          padding-left: 25px;
+          color: white;
+          background: black;
           font-size: 18px;
           font-weight: bold;
+        }
+        input[type=submit] {
+          width: 350px;
+          height: 50px;
+          color: white;
+          background: black;
+          font-size: 18px;
+          font-weight: bold;
+          margin-top: 10px;
+          border: solid 1px;
+          border-radius: 25px;
           :hover {
-            border-color: yellow;
-          }
-          :focus {
-            outline: none;
-          }
-          .error {
-            border: solid red 1px
+            cursor: pointer; 
           }
         }
-      }
-      button {
-        :hover {
-          cursor: pointer; 
+        .actions {
+          margin-top: 20px;
+          display: flex;
+          flex-flow: column wrap;
+          justify-content: center;
+          justify-items: center;
+          align-items: center;
         }
-        width: 350px;
-        height: 50px;
-        margin-top: 10px;
-        border: solid 1px;
-        border-radius: 25px;
-        color: white;
-        background: black;
-        font-size: 18px;
-        font-weight: bold;
-      }
-      input[type=submit] {
-        width: 350px;
-        height: 50px;
-        color: white;
-        background: black;
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 10px;
-        border: solid 1px;
-        border-radius: 25px;
-        :hover {
-          cursor: pointer; 
+        .disabled {
+          cursor: not-allowed !important;
         }
-      }
-      .actions {
-        margin-top: 20px;
-        display: flex;
-        flex-flow: column wrap;
-        justify-content: center;
-        justify-items: center;
-        align-items: center;
-      }
-      .disabled {
-        cursor: not-allowed !important;
-      }
-      .error-message {
-        color: red;
+        .error-message {
+          color: red;
+        }
       }
     }
   }

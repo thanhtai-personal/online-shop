@@ -23,8 +23,18 @@ const LoginComponent = (props) => {
     login()
   }, [login])
 
-  const handleGoogleLogin = useCallback((e) => {
-    googleLogin()
+  const onGGLoginSuccess = useCallback((googleUser) => {
+    const googleProfile = googleUser.getBasicProfile()
+    const profile = {
+      name: googleProfile.getName(),
+      email: googleProfile.getEmail(),
+      // image: googleProfile.getImageUrl(),
+      socialId: googleProfile.getId(),
+      // firstName: googleProfile.getFamilyName(),
+      // lastName: googleProfile.getGivenName(),
+      token: googleUser.getAuthResponse().id_token
+    }
+    googleLogin(profile)
   }, [googleLogin])
 
   const handleUpdateField = useCallback((field, e) => {
@@ -33,7 +43,7 @@ const LoginComponent = (props) => {
   }, [updateField, validateField])
   return (<LoginView
     onLogin={handleLogin}
-    onGoogleLogin={handleGoogleLogin}
+    onGoogleLogin={onGGLoginSuccess}
     onUpdateField={handleUpdateField}
     loading={loading}
     formError={formError}

@@ -11,9 +11,10 @@ export const login = () => {
   }
 }
 
-export const googleLogin = () => {
+export const googleLogin = (data) => {
   return {
-    type: LOGIN
+    type: LOGIN,
+    payload: data
   }
 }
 
