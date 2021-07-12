@@ -12,4 +12,4 @@ const Tabs = (props) => {
   </TabsStyled>)
 }
 
-export default Tabs
+export default React.memo(Tabs)

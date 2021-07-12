@@ -1,4 +1,4 @@
-import DashboardContainer from '../containers/dashboard'
+import AdminContainer from '../containers/admin'
 import setUpFeature from '../setup'
 import unsetFeature from '../unset'
 
@@ -7,7 +7,7 @@ const adminRoutes = [
     key: 'admin',
     path: '/admin',
     isExact: true,
-    component: DashboardContainer,
+    component: AdminContainer,
     hocs: [],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
@@ -16,7 +16,7 @@ const adminRoutes = [
     key: 'dashboard',
     path: '/admin/dashboard',
     isExact: true,
-    component: DashboardContainer,
+    component: AdminContainer,
     hocs: [],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,

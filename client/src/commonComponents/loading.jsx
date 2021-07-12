@@ -13,4 +13,4 @@ const LoadingComponent = () => {
   </div>)
 }
 
-export default LoadingComponent
+export default React.memo(LoadingComponent)

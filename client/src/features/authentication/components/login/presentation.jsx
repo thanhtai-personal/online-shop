@@ -34,10 +34,6 @@ const LoginView = (props) => {
     onUpdateField(loginModel.password, e, data)
   }, [onUpdateField])
 
-  const handleClickGoogleLogin = useCallback((e, data) => {
-    // e.preventDefault()
-  }, [])
-
   return (<LoginWrapper
     loginBackground={loginBgImage}
     leftPanelImage={leftPanelImage}

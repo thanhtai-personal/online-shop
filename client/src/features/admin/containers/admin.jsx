@@ -1,9 +1,10 @@
 import React, { Suspense, useEffect } from 'react'
 import LoadingComponent from 'root/commonComponents/loading'
+import '@coreui/coreui/scss/coreui.scss'
 
-const DashboardComponent = React.lazy(() => import('../components/dashboard'))
+const AdminLayout = React.lazy(() => import('../components/layout'))
 
-const DashboardContainer = (props) => {
+const AdminContainer = (props) => {
   const { setup, unset, ...nested } = props
   useEffect(() => {
     setup()
@@ -14,9 +15,9 @@ const DashboardContainer = (props) => {
 
   return (
     <Suspense fallback={<LoadingComponent />}>
-      <DashboardComponent {...nested} />
+      <AdminLayout {...nested} />
     </Suspense>
   )
 }
 
-export default DashboardContainer
+export default React.memo(AdminContainer)
