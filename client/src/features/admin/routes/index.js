@@ -20,6 +20,42 @@ const adminRoutes = [
     hocs: [],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
+  },
+  {
+    key: 'users',
+    path: '/admin/users',
+    isExact: true,
+    component: AdminContainer,
+    hocs: [],
+    setUpStore: setUpFeature,
+    unsetFeature: unsetFeature,
+  },
+  {
+    key: 'roles',
+    path: '/admin/roles',
+    isExact: true,
+    component: AdminContainer,
+    hocs: [],
+    setUpStore: setUpFeature,
+    unsetFeature: unsetFeature,
+  },
+  {
+    key: 'categories',
+    path: '/admin/categories',
+    isExact: true,
+    component: AdminContainer,
+    hocs: [],
+    setUpStore: setUpFeature,
+    unsetFeature: unsetFeature,
+  },
+  {
+    key: 'products',
+    path: '/admin/products',
+    isExact: true,
+    component: AdminContainer,
+    hocs: [],
+    setUpStore: setUpFeature,
+    unsetFeature: unsetFeature,
   }
 ]
 

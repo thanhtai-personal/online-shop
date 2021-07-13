@@ -1,2 +1,7 @@
 export const FEATURE_ADMIN_KEY = 'admin'
 export const DASHBOARD_KEY = 'dashboard'
+export const ROLES_KEY = 'roles'
+export const USERS_KEY = 'users'
+export const CATEGORIES_KEY = 'categories'
+export const ORDERS_KEY = 'orders'
+export const PRODUCTS_KEY = 'products'

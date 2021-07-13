@@ -14,7 +14,7 @@ const combineRoute = (appRoutes) => {
   return routesList.map((route = {}) => {
     let resultComponent = route.component
     if (route.setUpStore && typeof route.setUpStore === 'function' && route.unsetFeature && typeof route.unsetFeature === 'function'){ 
-      resultComponent = (props) => (<route.component {...props} setup={route.setUpStore} unset={route.unsetFeature} />)
+      resultComponent = (props) => (<route.component {...props} routeKey={route.key} setup={route.setUpStore} unset={route.unsetFeature} />)
     }
     if (Array.isArray(route.hocs)) {
       route.hocs.forEach((hoc) => {
