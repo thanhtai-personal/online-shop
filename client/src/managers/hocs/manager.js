@@ -1,4 +1,3 @@
-import useMultiThemes from 'root/hocs/theme'
 import { hocKeys } from 'root/constants'
 
 const combineHoc = (hocObj) => {
@@ -8,10 +7,9 @@ const combineHoc = (hocObj) => {
 function HocsManager() {
   // Create an object which maps keys to hocs
   const hocObj = {
-    [hocKeys.multiTheme]: useMultiThemes
   }
   // Create the initial combinedHOC
-  let hocs = [useMultiThemes]
+  let hocs = []
 
   return {
     getHocsMap: () => hocObj,
