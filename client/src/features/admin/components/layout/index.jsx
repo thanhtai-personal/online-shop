@@ -24,7 +24,7 @@ const AdminLayout = (props) => {
           case 'product':
             return <Products {...renderProps}/>
           default:
-            <Dashboard {...renderProps}/>
+            return <Dashboard {...renderProps}/>
         }
       }}
     />

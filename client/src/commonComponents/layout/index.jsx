@@ -4,26 +4,26 @@ const Layout = ({ children, ...props }) => {
   return (<div {...props}>{children}</div>)
 }
 
-Layout.Header = ({ children, className, ...props }) => {
-  return <React.Fragment className={`layout-header ${className}`} {...props}>
+Layout.Header = ({ children, ...props }) => {
+  return <React.Fragment {...props}>
     {children}
   </React.Fragment>
 }
 
-Layout.Sidebar = ({ children, className, ...props }) => {
-  return <React.Fragment className={`layout-sidebar ${className}`} {...props}>
+Layout.Sidebar = ({ children, ...props }) => {
+  return <React.Fragment {...props}>
     {children}
   </React.Fragment>
 }
 
-Layout.Content = ({ children, className, ...props }) => {
-  return <React.Fragment className={`layout-content ${className}`} {...props}>
+Layout.Content = ({ children, ...props }) => {
+  return <React.Fragment {...props}>
     {children}
   </React.Fragment>
 }
 
-Layout.Footer = ({ children, className, ...props }) => {
-  return <React.Fragment className={`layout-footer ${className}`} {...props}>
+Layout.Footer = ({ children, ...props }) => {
+  return <React.Fragment {...props}>
     {children}
   </React.Fragment>
 }
