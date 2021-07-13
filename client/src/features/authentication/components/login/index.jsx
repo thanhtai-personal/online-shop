@@ -1,6 +1,6 @@
-import React from 'react'
-import { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { withCookies } from 'react-cookie'
 import LoginView from './presentation'
 import {
   login,
@@ -15,8 +15,12 @@ const LoginComponent = (props) => {
     , login = () => {}
     , updateField = () => {}
     , validateField = () => {}
-    , loading, formError
+    , loading, formError, cookies, token
   } = props
+
+  useEffect(() => {
+    cookies.set('token', token, { path: '/' })
+  }, [token])
   
   const handleLogin = useCallback((e) => {
     e.preventDefault()
@@ -50,9 +54,10 @@ const LoginComponent = (props) => {
   />)
 }
 
-const mapState = ({ authentication = {} }) => ({
+const mapState = ({ authentication = {}, globalData }) => ({
   loading: authentication.loading,
-  formError: authentication.loginFormError
+  formError: authentication.loginFormError,
+  token: globalData.authData?.token
 })
 
 const mapDispatch = {
@@ -62,7 +67,7 @@ const mapDispatch = {
   validateField,
 }
 
-export default connect(mapState, mapDispatch)(LoginComponent)
+export default connect(mapState, mapDispatch)(withCookies(LoginComponent))
 // export default connect(mapState, mapDispatch)(React.memo(LoginComponent))
 //React.memo or React.PureComponent make component use shalow compare. (mean is address compare)
 //Normal component use deep compare (mean is property compare)

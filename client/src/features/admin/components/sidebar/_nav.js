@@ -36,6 +36,12 @@ const _nav =  [
     to: '/admin/products',
     icon: 'cil-puzzle'
   },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Orders',
+    to: '/admin/orders',
+    icon: 'cil-puzzle'
+  },
 ]
 
 export default _nav

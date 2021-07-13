@@ -49,6 +49,14 @@
       "isPublic": true
     },
     {
+      "route": "/v1/product/get-users",
+      "method": "POST",
+      "controller": "../controllers/v1/product/product.controller",
+      "action": "getUsers",
+      "key": "getUsers",
+      "isPublic": true
+    },
+    {
       "route": "/v1/product/get-categories",
       "method": "GET",
       "controller": "../controllers/v1/product/product.controller",
@@ -58,10 +66,18 @@
     },
     {
       "route": "/v1/product/get-orders",
-      "method": "GET",
+      "method": "POST",
       "controller": "../controllers/v1/product/product.controller",
       "action": "searchOrders",
       "key": "searchOrders",
+      "isAdmin": true
+    },
+    {
+      "route": "/v1/product/get-roles",
+      "method": "get",
+      "controller": "../controllers/v1/product/product.controller",
+      "action": "getRoles",
+      "key": "getRoles",
       "isAdmin": true
     },
     {
@@ -70,6 +86,14 @@
       "controller": "../controllers/v1/product/product.controller",
       "action": "getOrdersByUser",
       "key": "getOrdersByUser",
+      "isPublic": true
+    },
+    {
+      "route": "/v1/authen/getAuth",
+      "method": "GET",
+      "controller": "../controllers/v1/authen/authenticate.controller",
+      "action": "getAuth",
+      "key": "getAuth",
       "isPublic": true
     }
   ]

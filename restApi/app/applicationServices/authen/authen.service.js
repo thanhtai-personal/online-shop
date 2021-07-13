@@ -83,6 +83,14 @@ class AuthenticateService extends BaseService {
     const token = await jwt.sign({ user, role: roleClient }, jwtKey, { expiresIn: Config.tokenExpiredTime })
     return { user, token, role }
   }
+  
+  getAuth = async (token) => {
+    const decodedToken = jwt.verify(token || '', jwtKey)
+    return {
+      ...decodedToken,
+      isValidToken: true
+    }
+  }
 }
 
 module.exports = AuthenticateService;

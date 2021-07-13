@@ -1,4 +1,5 @@
 import { all, call, spawn } from 'redux-saga/effects'
+import globalDataSagas from 'root/globalSagas'
 
 function* combineSagas(_sagas = []) {
   let sagas = []
@@ -22,7 +23,9 @@ function* combineSagas(_sagas = []) {
 
 function createSagasManager() {
   // Create an object which maps keys to sagases
-  let sagas = {}
+  let sagas = {
+    globalData: globalDataSagas
+  }
 
   // Create the initial combinedSagas
   let combinedSagas = combineSagas(sagas)

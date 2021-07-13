@@ -13,9 +13,11 @@ import {
   LOGIN,
   VALIDATE_FIELD
 } from '../actions/types'
+import { SET_AUTHEN_DATA } from 'root/globalActions/types'
 import { authenApiNames, authenApis } from '../apis'
 import apiExecutor from 'root/api'
 import { FEATURE_AUTH_KEY } from '../constants'
+import { AUTHEN_STATUS } from 'root/enum'
 
 function* loginSagas(action = {}) {
   let loginData = yield select((state) => state[FEATURE_AUTH_KEY].loginData)
@@ -28,14 +30,16 @@ function* loginSagas(action = {}) {
     const responseData = yield apiExecutor[method](path, requestData).then(response => response)
     const authData = responseData?.data || {}
     yield put({ type: Utils.makeSagasActionType(LOGIN).SUCCESS, payload: authData })
+    yield put({ type: SET_AUTHEN_DATA, payload: { authData, authenStatus: AUTHEN_STATUS.SUCCESS } })
     const { role } = authData
     if (adminRoles.includes(role)) {
-      window.location.replace('/admin')
+      setTimeout(() => window.location.replace('/admin'))
     } else {
-      window.location.replace('/home')
+      setTimeout(() => window.location.replace('/home'))
     }
   } catch (error) {
     yield put({ type: Utils.makeSagasActionType(LOGIN).FAILED, payload: error || {} })
+    yield put({ type: SET_AUTHEN_DATA, payload: { authenStatus: AUTHEN_STATUS.FAILED } })
   }
 }
 

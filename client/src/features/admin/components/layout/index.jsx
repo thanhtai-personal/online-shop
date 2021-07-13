@@ -5,6 +5,7 @@ import Users from '../users'
 import Categories from '../categories'
 import Roles from '../roles'
 import Products from '../products'
+import Orders from '../orders'
 
 
 const AdminLayout = (props) => {
@@ -14,17 +15,19 @@ const AdminLayout = (props) => {
       render={(renderProps) => {
         switch (routeKey) {
           case 'users':
-            return <Users {...renderProps}/>
+            return <Users {...renderProps} />
           case 'dashboard':
-            return <Dashboard {...renderProps}/>
+            return <Dashboard {...renderProps} />
           case 'roles':
-            return <Roles {...renderProps}/>
+            return <Roles {...renderProps} />
           case 'categories':
-            return <Categories {...renderProps}/>
+            return <Categories {...renderProps} />
           case 'product':
-            return <Products {...renderProps}/>
+            return <Products {...renderProps} />
+          case 'orders':
+            return <Orders {...renderProps} />
           default:
-            return <Dashboard {...renderProps}/>
+            return <Dashboard {...renderProps} />
         }
       }}
     />

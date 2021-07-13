@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
+import globalDataReducer from 'root/globalReducers/globalData.reducer'
 
 function ReducerManager(history) {
   // Create an object which maps keys to reducers
   const reducers = {
-    router: connectRouter(history)
+    router: connectRouter(history),
+    globalData: globalDataReducer
   }
   // Create the initial combinedReducer
   let combinedReducer = combineReducers(reducers)

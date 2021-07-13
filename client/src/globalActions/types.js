@@ -1,0 +1,2 @@
+export const CHECK_AUTHEN = 'CHECK_AUTHEN'
+export const SET_AUTHEN_DATA = 'SET_AUTHEN_DATA'

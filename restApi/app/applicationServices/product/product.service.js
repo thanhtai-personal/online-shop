@@ -153,6 +153,24 @@ class ProductService extends BaseService {
       }
     })
   }
+
+  getRoles = async (dataReq) => {
+    return await this._roleService.findAll({
+      raw: true,
+      where: {
+        isActive: true,
+      }
+    })
+  }
+
+  getUsers = async (dataReq) => {
+    return await this._userService.findAll({
+      raw: true,
+      where: {
+        isActive: true,
+      }
+    })
+  }
 }
 
 module.exports = ProductService;
