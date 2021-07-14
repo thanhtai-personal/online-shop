@@ -1,7 +1,7 @@
 import LoginContainer from '../containers/login'
-import RegisterContainer from '../containers/register'
 import setUpFeature from '../setup'
 import unsetFeature from '../unset'
+import ErrorCatcher from 'root/hocs/errorCatcher'
 
 const defaultRoutes = [
   /**
@@ -13,7 +13,7 @@ const defaultRoutes = [
     path: '/dashboard',
     isExact: true,
     component: LoginContainer,
-    hocs: [],
+    hocs: [ErrorCatcher],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
   },
@@ -22,7 +22,7 @@ const defaultRoutes = [
     path: '/login',
     isExact: true,
     component: LoginContainer,
-    hocs: [],
+    hocs: [ErrorCatcher],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
   },
@@ -31,7 +31,7 @@ const defaultRoutes = [
     path: '/',
     isExact: true,
     component: LoginContainer,
-    hocs: [],
+    hocs: [ErrorCatcher],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
   }

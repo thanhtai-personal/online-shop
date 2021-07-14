@@ -12,6 +12,8 @@ import categoryModel from '../models/category'
 import Table from 'root/commonComponents/table'
 import Modal from 'root/commonComponents/modal'
 import modalTypes from 'root/commonComponents/modal/type'
+import formTypes from 'root/commonComponents/form/types'
+import Form from 'root/commonComponents/form'
 
 const text = {
   categoryManagement: 'Categories Management',
@@ -54,6 +56,11 @@ const CategoriesView = (props) => {
       onClose={toggleModal}
       text={text.createCategoryText}
     >
+      <>
+        <Form type={formTypes.coreuiForm}
+          model={categoryModel}
+        />
+      </>
     </Modal>
   </CategoryViewStyled>)
 }

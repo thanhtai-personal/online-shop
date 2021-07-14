@@ -3,6 +3,7 @@ import setUpFeature from '../setup'
 import unsetFeature from '../unset'
 import AuthenticateWrapper from 'root/hocs/authen'
 import { adminRoles } from 'root/globalHelpingTools/constants'
+import ErrorCatcher from 'root/hocs/errorCatcher'
 
 const AuthAdminContainer = AuthenticateWrapper(AdminContainer, adminRoles)
 
@@ -12,7 +13,7 @@ const adminRoutes = [
     path: '/admin',
     isExact: true,
     component: AuthAdminContainer,
-    hocs: [],
+    hocs: [ErrorCatcher],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
   },
@@ -21,7 +22,7 @@ const adminRoutes = [
     path: '/admin/dashboard',
     isExact: true,
     component: AuthAdminContainer,
-    hocs: [],
+    hocs: [ErrorCatcher],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
   },
@@ -30,7 +31,7 @@ const adminRoutes = [
     path: '/admin/users',
     isExact: true,
     component: AuthAdminContainer,
-    hocs: [],
+    hocs: [ErrorCatcher],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
   },
@@ -39,7 +40,7 @@ const adminRoutes = [
     path: '/admin/roles',
     isExact: true,
     component: AuthAdminContainer,
-    hocs: [],
+    hocs: [ErrorCatcher],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
   },
@@ -48,7 +49,7 @@ const adminRoutes = [
     path: '/admin/categories',
     isExact: true,
     component: AuthAdminContainer,
-    hocs: [],
+    hocs: [ErrorCatcher],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
   },
@@ -57,7 +58,7 @@ const adminRoutes = [
     path: '/admin/products',
     isExact: true,
     component: AuthAdminContainer,
-    hocs: [],
+    hocs: [ErrorCatcher],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
   },
@@ -66,7 +67,7 @@ const adminRoutes = [
     path: '/admin/orders',
     isExact: true,
     component: AuthAdminContainer,
-    hocs: [],
+    hocs: [ErrorCatcher],
     setUpStore: setUpFeature,
     unsetFeature: unsetFeature,
   }
