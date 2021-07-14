@@ -12,7 +12,7 @@ const createUserTable = async (pool, isEnd = false) => {
       "userName" text COLLATE pg_catalog."default",
       password text COLLATE pg_catalog."default",
       role uuid,
-      socialId text COLLATE pg_catalog."default",
+      "socialid" text COLLATE pg_catalog."default",
       "createdAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
       "updatedAt" timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
       "createdBy" uuid,

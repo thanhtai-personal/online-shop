@@ -90,7 +90,7 @@ class ProductController extends BaseController {
   getUsers = async (req, res) => {
     try {
       const dataReq = req.body
-      let reponse = await this._productService.getUsersß({ ...dataReq, authData: req.authData })
+      let reponse = await this._productService.getUsers({ ...dataReq, authData: req.authData })
       res.status(200).send(reponse)
     } catch (error) {
       res.status(500).send(error)

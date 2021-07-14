@@ -13,12 +13,12 @@ const useAuth = async (req, res, next) => {
   try {
     if (publicRoutes.includes(req.url)) return next() //validate token info
     else {
-      const decodedToken = JWT.verify(req.token, jwtKey)
+      const decodedToken = JWT.verify(req.headers?.token, jwtKey)
       const user = await userService.findOne({
         raw: true,
         where: {
-          [Op.or]: [{ userName: decodedToken.username }
-            , { email: decodedToken.email }]
+          [Op.or]: [{ userName: decodedToken.user?.userName || '' }
+            , { email: decodedToken.user?.email || '' }]
         }
       })
       const role = await roleService.findOne({

@@ -22,7 +22,7 @@ const User = createModel(UserModel, 'user', 'user', {
   'role': {
     type: DataTypes.UUID,
   },
-  'socialId': {
+  'socialid': {
     type: DataTypes.TEXT,
   },
 }, {

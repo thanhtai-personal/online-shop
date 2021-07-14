@@ -20,7 +20,8 @@ function* getRoles(action = {}) {
   // let loginData = yield select((state) => state[FEATURE_AUTH_KEY].loginData)
   try {
     const { method, path } = adminApis[adminApiNames.getRoles]
-    const paramsRequest = [path]
+    const token = yield window.cookieStore.get('token')
+    const paramsRequest = [path, { headers: { token: token?.value } }]
     const responseData = yield apiExecutor[method](...paramsRequest).then(response => response)
     const listRoles = responseData?.data || {}
     yield put({ type: Utils.makeSagasActionType(GET_ROLES).SUCCESS, payload: listRoles })
@@ -34,7 +35,8 @@ function* getProducts(action = {}) {
   try {
     const { method, path } = adminApis[adminApiNames.getProducts]
     const dataRequest = action.payload || {}
-    const paramsRequest = [path, dataRequest]
+    const token = yield window.cookieStore.get('token')
+    const paramsRequest = [path, dataRequest, { headers: { token: token?.value } }]
     const responseData = yield apiExecutor[method](...paramsRequest).then(response => response)
     const products = responseData?.data || {}
     yield put({ type: Utils.makeSagasActionType(GET_PRODUCTS).SUCCESS, payload: products })
@@ -47,7 +49,8 @@ function* getCategories(action = {}) {
   // let loginData = yield select((state) => state[FEATURE_AUTH_KEY].loginData)
   try {
     const { method, path } = adminApis[adminApiNames.getCategories]
-    const paramsRequest = [path]
+    const token = yield window.cookieStore.get('token')
+    const paramsRequest = [path, { headers: { token: token?.value } }]
     const responseData = yield apiExecutor[method](...paramsRequest).then(response => response)
     const listCategories = responseData?.data || {}
     yield put({ type: Utils.makeSagasActionType(GET_CATEGORIES).SUCCESS, payload: listCategories })
@@ -60,7 +63,8 @@ function* getUsers(action = {}) {
   // let loginData = yield select((state) => state[FEATURE_AUTH_KEY].loginData)
   try {
     const { method, path } = adminApis[adminApiNames.getUsers]
-    const paramsRequest = [path, action.payload || {}]
+    const token = yield window.cookieStore.get('token')
+    const paramsRequest = [path, action.data, { headers: { token: token?.value } }]
     const responseData = yield apiExecutor[method](...paramsRequest).then(response => response)
     const listUsers = responseData?.data || {}
     yield put({ type: Utils.makeSagasActionType(GET_USERS).SUCCESS, payload: listUsers })
@@ -73,7 +77,8 @@ function* getOrders(action = {}) {
   // let loginData = yield select((state) => state[FEATURE_AUTH_KEY].loginData)
   try {
     const { method, path } = adminApis[adminApiNames.getOrders]
-    const paramsRequest = [path, action.payload || {}]
+    const token = yield window.cookieStore.get('token')
+    const paramsRequest = [path, action.payload, { headers: { token: token?.value } }]
     const responseData = yield apiExecutor[method](...paramsRequest).then(response => response)
     const listOrders = responseData?.data || {}
     yield put({ type: Utils.makeSagasActionType(GET_ORDERS).SUCCESS, payload: listOrders })

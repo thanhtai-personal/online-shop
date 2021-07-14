@@ -50,7 +50,7 @@ class AuthenticateService extends BaseService {
   loginByEmail = async (dataReq) => {
     const user = await this._userService.findOne({
       raw: true,
-      attributes: ['id', 'name', 'email', 'role', 'socialId'],
+      attributes: ['id', 'name', 'email', 'role', 'socialid'],
       where: {
         email: dataReq.email,
         isActive: true
