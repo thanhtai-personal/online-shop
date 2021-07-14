@@ -47,10 +47,10 @@ class ProductController extends BaseController {
     }
   }
 
-  getCategory = async (req, res) => {
+  getCategories = async (req, res) => {
     try {
       const dataReq = req.body
-      let reponse = await this._productService.getCategory({ ...dataReq, authData: req.authData })
+      let reponse = await this._productService.getCategories({ ...dataReq, authData: req.authData })
       res.status(200).send(reponse)
     } catch (error) {
       res.status(500).send(error)

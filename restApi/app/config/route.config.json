@@ -44,7 +44,7 @@
       "route": "/v1/product/search",
       "method": "POST",
       "controller": "../controllers/v1/product/product.controller",
-      "action": "search",
+      "action": "searchProducts",
       "key": "searchProducts",
       "isPublic": true
     },

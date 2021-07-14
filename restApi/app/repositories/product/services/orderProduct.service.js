@@ -1,3 +1,3 @@
-const OrderProductService = require('../models/orderProduct')
+const ProductService = require('../models/product')
 
-module.exports =  OrderProductService
+module.exports =  ProductService

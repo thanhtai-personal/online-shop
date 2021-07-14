@@ -126,7 +126,7 @@ class ProductService extends BaseService {
     return products
   }
 
-  getCategory = async (dataReq) => {
+  getCategories = async (dataReq) => {
     return await this._categoryService.findAll({
       raw: true,
       where: {

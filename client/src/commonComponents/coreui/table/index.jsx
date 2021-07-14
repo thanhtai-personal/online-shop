@@ -2,7 +2,7 @@ import React from 'react'
 import { TableStyled } from './styled'
 
 const CoreUITable = (props) => {
-  const { model, data, options = {}, className = {} } = props
+  const { model, data = [], options = {}, className = {} } = props
   const { pagination, take, skip } = options
   return (
     <TableStyled className={className.table || 'table table-hover table-outline mb-0 d-none d-sm-table'}>

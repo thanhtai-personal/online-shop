@@ -5,6 +5,19 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "name": "nodemon-debug-backend",
+      "program": "./restApi/server.js 1 prod 127.0.0.1 3056 9000",
+      "request": "launch",
+      "restart": true,
+      "runtimeExecutable": "nodemon",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "pwa-node"
+    },
+    {
       "name": "Launch Program",
       "program": "${workspaceFolder}/restApi/server.js",
       "request": "launch",
