@@ -22,7 +22,7 @@ const AdminLayout = (props) => {
             return <Roles {...renderProps} />
           case 'categories':
             return <Categories {...renderProps} />
-          case 'product':
+          case 'products':
             return <Products {...renderProps} />
           case 'orders':
             return <Orders {...renderProps} />

@@ -1,10 +1,19 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
 
+const text = {
+  dashboard: 'Dashboard',
+  users: 'Users',
+  roles: 'Roles',
+  categories: 'Categories',
+  products: 'Products',
+  orders: 'Orders'
+}
+
 const _nav =  [
   {
     _tag: 'CSidebarNavItem',
-    name: 'Dashboard',
+    name: text.dashboard,
     to: '/admin/dashboard',
     icon: <CIcon name='cil-speedometer' customClasses='c-sidebar-nav-icon'/>
   },
@@ -14,31 +23,31 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'User',
+    name: text.users,
     to: '/admin/users',
     icon: 'cil-puzzle'
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Role',
+    name: text.roles,
     to: '/admin/roles',
     icon: 'cil-puzzle'
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Categories',
+    name: text.categories,
     to: '/admin/categories',
     icon: 'cil-puzzle'
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Products',
+    name: text.products,
     to: '/admin/products',
     icon: 'cil-puzzle'
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Orders',
+    name: text.orders,
     to: '/admin/orders',
     icon: 'cil-puzzle'
   },

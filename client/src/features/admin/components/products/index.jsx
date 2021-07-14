@@ -1,8 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { getProducts } from './../../actions'
 import ProductsView from './presentation'
 
 const Products = (props) => {
-  return (<ProductsView />)
+
+  const { products, getProducts } = props
+
+  useEffect(() => {
+    getProducts()
+  }, [])
+
+  return (<ProductsView listProducts={products} />)
 }
 
-export default React.memo(Products)
+const mapState = ({ products }) => ({
+  products: products.listProducts
+})
+
+const mapDispatch = {
+  getProducts,
+}
+
+export default connect(mapState, mapDispatch)(React.memo(Products))

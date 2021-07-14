@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { getUsers } from './../../actions'
+import { getRoles, getUsers } from './../../actions'
 import UsersView from './presentation'
 
 const Users = (props) => {
-  const { getUsers, users } = props
+  const { getUsers, getRoles, users } = props
 
   useEffect(() => {
     getUsers()
-  }, [getUsers])
+    getRoles()
+  }, [])
 
   return (<UsersView listUsers={users} />)
 }
@@ -18,7 +19,8 @@ const mapState = ({ users }) => ({
 })
 
 const mapDispatch = {
-  getUsers
+  getUsers,
+  getRoles
 }
 
 export default connect(mapState, mapDispatch)(React.memo(Users))
