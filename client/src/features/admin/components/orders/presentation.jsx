@@ -6,7 +6,7 @@ import {
   CCardHeader,
 } from '@coreui/react'
 import orderModel from '../models/order'
-import Table from 'root/commonComponents/coreui/table'
+import Table from 'root/commonComponents/table'
 
 const text = {
   orderManagement: 'Orders Management'

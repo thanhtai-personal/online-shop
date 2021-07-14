@@ -9,7 +9,7 @@ import {
   CCardTitle
 } from '@coreui/react'
 import categoryModel from '../models/category'
-import Table from 'root/commonComponents/coreui/table'
+import Table from 'root/commonComponents/table'
 import Modal from 'root/commonComponents/modal'
 import modalTypes from 'root/commonComponents/modal/type'
 

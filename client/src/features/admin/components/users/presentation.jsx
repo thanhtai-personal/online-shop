@@ -6,7 +6,7 @@ import {
   CCardHeader,
 } from '@coreui/react'
 import userModel from '../models/user'
-import Table from 'root/commonComponents/coreui/table'
+import Table from 'root/commonComponents/table'
 
 const text = {
   userManagement: 'Users Management'

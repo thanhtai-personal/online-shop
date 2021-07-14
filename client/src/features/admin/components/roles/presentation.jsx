@@ -6,7 +6,7 @@ import {
   CCardHeader,
 } from '@coreui/react'
 import roleModel from '../models/role'
-import Table from 'root/commonComponents/coreui/table'
+import Table from 'root/commonComponents/table'
 
 const text = {
   roleManagement: 'Roles Management'
