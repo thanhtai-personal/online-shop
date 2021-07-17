@@ -6,6 +6,7 @@ import {
 } from '@coreui/react'
 import defaultUploadImage from 'root/assets/images/defaultUpload.png'
 import { useEffect } from 'react'
+import { useMemo } from 'react'
 
 const textDefault = {
   imageUrlPlaceholder: 'Enter image url...',
@@ -29,15 +30,26 @@ const ImageUpload = (props) => {
   }, [onChange])
 
   const handleChangeUrlInput = useCallback((e) => {
-    onChange && typeof onChange === 'function' && onChange(dataKey, e.target.value)
+    const imageUrls = e.target.value.split(',').map((src) => ({
+      src
+    }))
+    onChange && typeof onChange === 'function' && onChange(dataKey, imageUrls)
   }, [onChange])
 
-  const handleImageClick = useCallback((e) => {
-  }, [setSelectedImage])
+  const handleImageClick = useCallback((index) => {
+    setSelectedImage(value[index])
+  }, [setSelectedImage, value])
 
   useEffect(() => {
-    console.log('run effect')
     value[0] && setSelectedImage(value[0])
+  }, [value])
+
+  const imageUrls = useMemo(() => {
+    let imageUrls = ''
+    for (let v of value) {
+      imageUrls = `${imageUrls}${imageUrls && ','}${v?.src || 'local file'}`
+    }
+    return imageUrls
   }, [value])
 
   return (
@@ -49,11 +61,14 @@ const ImageUpload = (props) => {
       <div style={{ width: '50%', paddingRight: '2em' }}>
         <CLabel htmlFor={'url-input'}>{textDefault.imageUrlLabel}</CLabel>
         <CTextarea
+          type={'url'}
           id={'url-input'}
           name={'url-input'}
           placeholder={textDefault.imageUrlPlaceholder}
           autoComplete={autoComplete}
           onChange={handleChangeUrlInput}
+          value={imageUrls}
+          disabled
           rows={5}
         />
         <CLabel style={{ marginTop: '1em' }} htmlFor={'image-input'}>{textDefault.imageFileLabel}</CLabel>
@@ -65,6 +80,7 @@ const ImageUpload = (props) => {
           style={{
             width: '100%'
           }}
+          accept={'image/*'}
           multiple
           {...nestedProps}
         />
@@ -75,7 +91,7 @@ const ImageUpload = (props) => {
         justifyContent: 'flex-start'
       }}>
         <picture
-          style={{ width: '80%', height: '400px' }}
+          style={{ width: '80%', height: '350px' }}
           key={`showing-image`}>
           <img src={selectedImage ? 
             selectedImage.src || window.URL.createObjectURL(selectedImage)
@@ -89,9 +105,11 @@ const ImageUpload = (props) => {
             maxHeight: '400px',
             overflow: 'auto'
           }}
-        >{value.map((_image, index) => (
-          <picture onClick={handleImageClick}
-            style={{ width: '100%' }}
+        >{value && value.map((_image, index) => (
+          <picture onClick={() => {
+            handleImageClick(index)
+          }}
+            style={{ width: '100%', cursor: 'pointer' }}
             key={`image-${_image.name}-${index}`}>
             <img src={_image.src || window.URL.createObjectURL(_image)} alt={_image.name} style={{ width: '100%' }} />
           </picture>
