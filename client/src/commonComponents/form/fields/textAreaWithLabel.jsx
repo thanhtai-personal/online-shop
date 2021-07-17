@@ -1,21 +1,22 @@
 import React from 'react'
 import {
   CLabel,
-  CInput,
+  CTextarea,
   CFormText,
 } from '@coreui/react'
 
 const TextWithLabel = (props) => {
-  const { style, htmlFor, type, id, name, placeholder, autoComplete, text = {}, ...nestedProps } = props
+  const { style, htmlFor, type, id, name, placeholder, autoComplete, text = {}, rows = 15, ...nestedProps } = props
   return (
-    <div style={ style || { width: '50%' }}>
+    <div style={style || { width: '50%' }}>
       <CLabel htmlFor={htmlFor}>{text.label}</CLabel>
-      <CInput
+      <CTextarea
         type={type}
         id={id}
         name={name}
         placeholder={placeholder}
         autoComplete={autoComplete}
+        rows={rows}
         style={{
           width: '100%'
         }}

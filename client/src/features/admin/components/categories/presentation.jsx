@@ -8,7 +8,7 @@ import {
   CButton,
   CCardTitle
 } from '@coreui/react'
-import categoryModel from '../models/category'
+import categoryModel from '../../models/category'
 import Table from 'root/commonComponents/table'
 import Modal from 'root/commonComponents/modal'
 import modalTypes from 'root/commonComponents/modal/type'
@@ -56,11 +56,9 @@ const CategoriesView = (props) => {
       onClose={toggleModal}
       text={text.createCategoryText}
     >
-      <>
-        <Form type={formTypes.coreuiForm}
-          model={categoryModel}
-        />
-      </>
+      <Form type={formTypes.coreuiForm}
+        model={categoryModel}
+      />
     </Modal>
   </CategoryViewStyled>)
 }

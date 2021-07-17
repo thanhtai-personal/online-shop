@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormStyled } from './styled'
+import { FormStyled, CustomStyledCoreUI } from './styled'
 import CoreUIForm from './coreuiForm'
 import formTypes from './types'
 
@@ -9,8 +9,9 @@ const Form = ({ type, ...nestedProps }) => {
       return (<FormStyled {...nestedProps}>
       </FormStyled>)
     case formTypes.coreuiForm:
-      return (<CoreUIForm {...nestedProps}>
-      </CoreUIForm>)
+      return (<CustomStyledCoreUI>
+        <CoreUIForm {...nestedProps} />
+      </CustomStyledCoreUI>)
     default:
       return (<FormStyled {...nestedProps}>
       </FormStyled>)

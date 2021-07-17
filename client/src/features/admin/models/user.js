@@ -1,4 +1,4 @@
-import RoleField from '../customFields/roleField'
+import RoleField from '../components/customFields/roleField'
 
 const userModel = {
   userName: {

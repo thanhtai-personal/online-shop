@@ -5,7 +5,7 @@ import {
   CCardBody,
   CCardHeader,
 } from '@coreui/react'
-import userModel from '../models/user'
+import userModel from '../../models/user'
 import Table from 'root/commonComponents/table'
 
 const text = {

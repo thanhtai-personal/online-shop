@@ -3,7 +3,8 @@ import {
   GET_USERS,
   GET_CATEGORIES,
   GET_PRODUCTS,
-  GET_ORDERS
+  GET_ORDERS,
+  UPDATE_DATA
 } from './types'
 
 export const getRoles = () => {
@@ -38,5 +39,12 @@ export const getOrders = (data) => {
   return {
     type: GET_ORDERS,
     payload: data
+  }
+}
+
+export const updateData = (modelName, fieldName, value, option) => {
+  return {
+    type: UPDATE_DATA,
+    payload: { modelName, fieldName, value, option }
   }
 }

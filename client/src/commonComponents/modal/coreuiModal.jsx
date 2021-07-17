@@ -17,7 +17,7 @@ const CoreUIModal = (props) => {
       </CModalTitle>
       {modalHeader && typeof modalHeader === 'function' && modalHeader()}
     </CModalHeader>
-    <CModalBody style={{ minHeight: '60vh' }}>
+    <CModalBody>
       {children}
     </CModalBody>
     <CModalFooter >

@@ -2,7 +2,8 @@ import Utils from 'root/globalHelpingTools/utils'
 import {
   takeLatest
   , all
-  , put
+  , put,
+  throttle
 } from 'redux-saga/effects'
 
 import {
@@ -10,7 +11,8 @@ import {
   GET_USERS,
   GET_CATEGORIES,
   GET_PRODUCTS,
-  GET_ORDERS
+  GET_ORDERS,
+  UPDATE_DATA
 } from '../actions/types'
 import { adminApiNames, adminApis } from '../apis'
 import apiExecutor from 'root/api'
@@ -87,12 +89,18 @@ function* getOrders(action = {}) {
   }
 }
 
+function* updateData({ type, payload }) {
+  const { modelName, fieldName, value, option } = payload
+  yield put({ type: `UPDATE_DATA_${modelName}`, payload: { fieldName, value, option } })
+}
+
 export default function* adminWatchers() {
   yield all([
     takeLatest(GET_ROLES, getRoles),
     takeLatest(GET_PRODUCTS, getProducts),
     takeLatest(GET_USERS, getUsers),
     takeLatest(GET_CATEGORIES, getCategories),
-    takeLatest(GET_ORDERS, getOrders)
+    takeLatest(GET_ORDERS, getOrders),
+    throttle(1000, UPDATE_DATA, updateData)
   ])
 }
