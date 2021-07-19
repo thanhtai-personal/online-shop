@@ -6,3 +6,4 @@
   export const GET_ORDERS = 'GET_ORDERS'
   export const UPDATE_DATA = 'UPDATE_DATA'
   export const UPDATE_DATA_PRODUCTS = 'UPDATE_DATA_PRODUCTS'
+  export const CREATE_PRODUCT = 'CREATE_PRODUCT'

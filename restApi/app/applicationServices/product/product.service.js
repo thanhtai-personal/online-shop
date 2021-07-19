@@ -33,7 +33,7 @@ class ProductService extends BaseService {
       createdBy: authData.user?.id,
       updatedBy: authData.user?.id,
       createdTime: new Date(),
-      updatedTime: new Date(),
+      updatedTime: new Date()
     })
     for (let image of images) {
       await this._imageService.create({
@@ -43,7 +43,7 @@ class ProductService extends BaseService {
         createdBy: authData.user?.id,
         updatedBy: authData.user?.id,
         createdTime: new Date(),
-        updatedTime: new Date(),
+        updatedTime: new Date()
       })
     }
     return { product, images }
@@ -67,7 +67,7 @@ class ProductService extends BaseService {
       createdBy: authData.user?.id,
       updatedBy: authData.user?.id,
       createdTime: new Date(),
-      updatedTime: new Date(),
+      updatedTime: new Date()
     })
     for (let product of products) {
       await this._orderProductService.create({

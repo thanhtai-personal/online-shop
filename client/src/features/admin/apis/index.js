@@ -3,7 +3,8 @@ export const adminApiNames = {
   getProducts: 'getProducts',
   getOrders: 'getOrders',
   getCategories: 'getCategories',
-  getUsers: 'getUsers'
+  getUsers: 'getUsers',
+  createProduct: 'createProduct'
 }
 
 export const adminApis = {
@@ -26,5 +27,9 @@ export const adminApis = {
   [adminApiNames.getCategories]: {
     method: 'get',
     path: '/v1/product/get-categories',
+  },
+  [adminApiNames.createProduct]: {
+    method: 'post',
+    path: '/v1/product/create',
   }
 }

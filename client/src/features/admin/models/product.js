@@ -3,7 +3,8 @@ import fields from 'root/commonComponents/form/fields'
 const {
   ImageUpload,
   VideoEmbed,
-  TextAreaWithLabel
+  TextAreaWithLabel,
+  MultiSelectDropdown
 } = fields
 
 const text = {
@@ -11,15 +12,21 @@ const text = {
   description: 'Description',
   images: 'Images',
   video: 'Video',
+  videos: 'Videos',
   namePlaceholder: 'Enter product name...',
-  descriptionPlaceholder: 'Enter product description...'
+  descriptionPlaceholder: 'Enter product description...',
+  categories: 'Categories',
+  category: 'Category',
+  categoriesSelection: 'Select categories',
+  createdBy: 'Created by',
+  createdDate: 'Created date'
 }
 
 const productModel = {
   dataKey: 'PRODUCTS',
   name: {
     key: 'name',
-    label: 'Name',
+    label: text.name,
     placeholder: text.namePlaceholder,
     isForm: true,
     dataKey: 'name',
@@ -27,9 +34,20 @@ const productModel = {
       label: text.name,
     },
   },
+  category: {
+    key: 'category',
+    label: text.category,
+    title: text.categoriesSelection,
+    isForm: true,
+    dataKey: 'category',
+    text: {
+      label: text.categories,
+    },
+    component: MultiSelectDropdown
+  },
   description: {
     key: 'description',
-    label: 'Description',
+    label: text.description,
     isForm: true,
     placeholder: text.descriptionPlaceholder,
     text: {
@@ -40,7 +58,7 @@ const productModel = {
   },
   images: {
     key: 'images',
-    label: 'Images',
+    label: text.images,
     isForm: true,
     text: {
       label: text.images,
@@ -51,7 +69,7 @@ const productModel = {
   },
   video: {
     key: 'video',
-    label: 'Video',
+    label: text.video,
     isForm: true,
     dataKey: 'video',
     text: {
@@ -61,7 +79,7 @@ const productModel = {
   },
   createdBy: {
     key: 'createBy',
-    label: 'Created by',
+    label: text.createdBy,
     render: (value, users) => {
       // for custom field in table
       const user = users.find((u => u.id === value)) || {}
@@ -70,7 +88,7 @@ const productModel = {
   },
   createdDate: {
     key: 'createdAt',
-    label: 'Created date'
+    label: text.createdDate
   },
 }
 

@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
-const { sequelize } = require('./../sequelize')
+const { sequelize } = require('./../sequelize');
+const { v4: uuidv4, validate: uuidValidate } = require('uuid')
 
 const createModel = (Model, modelName, tableName, extendsProperties = {}, option = {}) => {
   const { hooks, ...nestedOption } = option

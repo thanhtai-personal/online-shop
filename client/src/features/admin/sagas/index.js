@@ -2,8 +2,9 @@ import Utils from 'root/globalHelpingTools/utils'
 import {
   takeLatest
   , all
-  , put,
-  throttle
+  , put
+  , throttle
+  , select
 } from 'redux-saga/effects'
 
 import {
@@ -12,10 +13,12 @@ import {
   GET_CATEGORIES,
   GET_PRODUCTS,
   GET_ORDERS,
-  UPDATE_DATA
+  UPDATE_DATA,
+  CREATE_PRODUCT
 } from '../actions/types'
 import { adminApiNames, adminApis } from '../apis'
 import apiExecutor from 'root/api'
+import { PRODUCTS_KEY } from '../constants'
 
 
 function* getRoles(action = {}) {
@@ -94,6 +97,27 @@ function* updateData({ type, payload }) {
   yield put({ type: `UPDATE_DATA_${modelName}`, payload: { fieldName, value, option } })
 }
 
+
+function* createProduct(action = {}) {
+  const productData = yield select((state) => state[PRODUCTS_KEY].model)
+  try {
+    const submitData = {
+      name: productData.name?.value,
+      images: productData.images?.value,
+      video: productData.video?.value,
+      description: productData.description?.value
+    }
+    const { method, path } = adminApis[adminApiNames.createProduct]
+    const token = yield window.cookieStore.get('token')
+    const paramsRequest = [path, submitData, { headers: { token: token?.value } }]
+    const responseData = yield apiExecutor[method](...paramsRequest).then(response => response)
+    const listOrders = responseData?.data || {}
+    yield put({ type: Utils.makeSagasActionType(CREATE_PRODUCT).SUCCESS, payload: listOrders })
+  } catch (error) {
+    yield put({ type: Utils.makeSagasActionType(CREATE_PRODUCT).FAILED, payload: error || {} })
+  }
+}
+
 export default function* adminWatchers() {
   yield all([
     takeLatest(GET_ROLES, getRoles),
@@ -101,6 +125,7 @@ export default function* adminWatchers() {
     takeLatest(GET_USERS, getUsers),
     takeLatest(GET_CATEGORIES, getCategories),
     takeLatest(GET_ORDERS, getOrders),
+    takeLatest(CREATE_PRODUCT, createProduct),
     throttle(1000, UPDATE_DATA, updateData)
   ])
 }

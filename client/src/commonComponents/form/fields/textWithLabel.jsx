@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import {
   CLabel,
   CInput,
@@ -6,9 +6,14 @@ import {
 } from '@coreui/react'
 
 const TextWithLabel = (props) => {
-  const { style, htmlFor, type, id, name, placeholder, autoComplete, text = {}, ...nestedProps } = props
+  const { value, onChange, dataKey, style, htmlFor, type, id, name, placeholder, autoComplete, text = {}, ...nestedProps } = props
+
+  const handleChange = useCallback((e) => {
+    onChange && typeof onChange === 'function' && onChange(dataKey, e.target.value)
+  }, [onChange, dataKey])
+
   return (
-    <div style={ style || { width: '50%' }}>
+    <div style={style || { width: '50%' }}>
       <CLabel htmlFor={htmlFor}>{text.label}</CLabel>
       <CInput
         type={type}
@@ -19,6 +24,7 @@ const TextWithLabel = (props) => {
         style={{
           width: '100%'
         }}
+        onChange={handleChange}
         {...nestedProps}
       />
       {text.formText && <CFormText className='help-block'>{text.formText}</CFormText>}

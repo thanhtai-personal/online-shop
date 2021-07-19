@@ -96,6 +96,16 @@ class ProductController extends BaseController {
       res.status(500).send(error)
     }
   }
+
+  createProduct = async (req, res) => {
+    try {
+      const dataReq = req.body
+      let reponse = await this._productService.addOrEdit({ ...dataReq, authData: req.authData })
+      res.status(200).send(reponse)
+    } catch (error) {
+      res.status(500).send(error)
+    }
+  }
 }
 
 module.exports = ProductController

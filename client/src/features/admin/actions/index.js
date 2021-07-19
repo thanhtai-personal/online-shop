@@ -4,7 +4,8 @@ import {
   GET_CATEGORIES,
   GET_PRODUCTS,
   GET_ORDERS,
-  UPDATE_DATA
+  UPDATE_DATA,
+  CREATE_PRODUCT
 } from './types'
 
 export const getRoles = () => {
@@ -46,5 +47,12 @@ export const updateData = (modelName, fieldName, value, option) => {
   return {
     type: UPDATE_DATA,
     payload: { modelName, fieldName, value, option }
+  }
+}
+
+export const createProduct = () => {
+  return {
+    type: CREATE_PRODUCT,
+    payload: { }
   }
 }

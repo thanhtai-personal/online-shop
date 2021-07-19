@@ -32,7 +32,6 @@ const Sidebar = () => {
         {text.logo}
       </CSidebarBrand>
       <CSidebarNav>
-
         <CCreateElement
           items={navigation}
           components={{

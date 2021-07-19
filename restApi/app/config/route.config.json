@@ -95,6 +95,14 @@
       "action": "getAuth",
       "key": "getAuth",
       "isPublic": true
+    },
+    {
+      "route": "/v1/product/create",
+      "method": "POST",
+      "controller": "../controllers/v1/product/product.controller",
+      "action": "createProduct",
+      "key": "createProduct",
+      "isAdmin": true
     }
   ]
 }

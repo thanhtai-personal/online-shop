@@ -15,7 +15,7 @@ const categoriesReducer = (state = initalState, { type, payload }) => {
     case makeSagasActionType(GET_CATEGORIES).SUCCESS: 
       return {
         ...state,
-        listRoles: payload
+        listCategories: payload
       }
     default:
       return state

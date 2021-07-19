@@ -15,15 +15,20 @@ import Form from 'root/commonComponents/form'
 
 const text = {
   productManagement: 'Products Management',
-  createProduct: 'Add new Product'
+  createProduct: 'Add new Product',
+  title: 'Create Product'
 }
 
 const ProductsView = (props) => {
   const { listProducts, take = 10, skip = 0
-    , updateData, model
+    , updateData, model, createProduct, getOptions
   } = props
 
   const [isOpenModalCreate, setIsOpenModalCreate] = useState(false)
+
+  const handleCreateProduct = useCallback(() => {
+    createProduct && typeof createProduct === 'function' && createProduct()
+  }, [createProduct])
 
   const toggleModal = useCallback(() => {
     setIsOpenModalCreate(!isOpenModalCreate)
@@ -54,6 +59,9 @@ const ProductsView = (props) => {
       <Form type={formTypes.coreuiForm}
         model={model}
         onUpdateData={updateData}
+        onSubmit={handleCreateProduct}
+        title={text.title}
+        getOptions={getOptions}
       />
     </Modal>
   </ProductViewStyled>)

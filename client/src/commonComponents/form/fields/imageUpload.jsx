@@ -27,14 +27,14 @@ const ImageUpload = (props) => {
       newImages.push(file)
     }
     onChange && typeof onChange === 'function' && onChange(dataKey, newImages)
-  }, [onChange])
+  }, [onChange, dataKey])
 
   const handleChangeUrlInput = useCallback((e) => {
     const imageUrls = e.target.value.split(',').map((src) => ({
       src
     }))
     onChange && typeof onChange === 'function' && onChange(dataKey, imageUrls)
-  }, [onChange])
+  }, [onChange, dataKey])
 
   const handleImageClick = useCallback((index) => {
     setSelectedImage(value[index])
@@ -47,7 +47,7 @@ const ImageUpload = (props) => {
   const imageUrls = useMemo(() => {
     let imageUrls = ''
     for (let v of value) {
-      imageUrls = `${imageUrls}${imageUrls && ','}${v?.src || 'local file'}`
+      imageUrls = `${imageUrls}${imageUrls && ','}${v?.name || 'unnamed image'}`
     }
     return imageUrls
   }, [value])
@@ -96,13 +96,14 @@ const ImageUpload = (props) => {
           <img src={selectedImage ? 
             selectedImage.src || window.URL.createObjectURL(selectedImage)
             : defaultUploadImage
-          } alt={selectedImage?.name || 'default-image'} style={{ width: '100%' }} />
+          } alt={selectedImage?.name || 'default-image'}
+            style={{ width: '100%', maxHeight: '350px' }} />
         </picture>
         <div
           style={{ width: '20%',
             display: 'flex',
             flexDirection: 'column-reverse',
-            maxHeight: '400px',
+            maxHeight: '350px',
             overflow: 'auto'
           }}
         >{value && value.map((_image, index) => (
