@@ -14,11 +14,12 @@ import {
   GET_PRODUCTS,
   GET_ORDERS,
   UPDATE_DATA,
-  CREATE_PRODUCT
+  CREATE_PRODUCT,
+  CREATE_CATEGORY
 } from '../actions/types'
 import { adminApiNames, adminApis } from '../apis'
 import apiExecutor from 'root/api'
-import { PRODUCTS_KEY } from '../constants'
+import { CATEGORIES_KEY, PRODUCTS_KEY } from '../constants'
 
 
 function* getRoles(action = {}) {
@@ -97,7 +98,6 @@ function* updateData({ type, payload }) {
   yield put({ type: `UPDATE_DATA_${modelName}`, payload: { fieldName, value, option } })
 }
 
-
 function* createProduct(action = {}) {
   const productData = yield select((state) => state[PRODUCTS_KEY].model)
   try {
@@ -118,6 +118,24 @@ function* createProduct(action = {}) {
   }
 }
 
+
+function* createCategory(action = {}) {
+  const categoryData = yield select((state) => state[CATEGORIES_KEY].model)
+  try {
+    const submitData = {
+      name: categoryData.name?.value,
+    }
+    const { method, path } = adminApis[adminApiNames.createCategory]
+    const token = yield window.cookieStore.get('token')
+    const paramsRequest = [path, submitData, { headers: { token: token?.value } }]
+    const responseData = yield apiExecutor[method](...paramsRequest).then(response => response)
+    const listOrders = responseData?.data || {}
+    yield put({ type: Utils.makeSagasActionType(CREATE_CATEGORY).SUCCESS, payload: listOrders })
+  } catch (error) {
+    yield put({ type: Utils.makeSagasActionType(CREATE_CATEGORY).FAILED, payload: error || {} })
+  }
+}
+
 export default function* adminWatchers() {
   yield all([
     takeLatest(GET_ROLES, getRoles),
@@ -126,6 +144,7 @@ export default function* adminWatchers() {
     takeLatest(GET_CATEGORIES, getCategories),
     takeLatest(GET_ORDERS, getOrders),
     takeLatest(CREATE_PRODUCT, createProduct),
+    takeLatest(CREATE_CATEGORY, createCategory),
     throttle(1000, UPDATE_DATA, updateData)
   ])
 }

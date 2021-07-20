@@ -103,6 +103,14 @@
       "action": "createProduct",
       "key": "createProduct",
       "isAdmin": true
+    },
+    {
+      "route": "/v1/product/create-category",
+      "method": "POST",
+      "controller": "../controllers/v1/product/product.controller",
+      "action": "createCategory",
+      "key": "createCategory",
+      "isAdmin": true
     }
   ]
 }

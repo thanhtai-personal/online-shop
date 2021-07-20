@@ -18,13 +18,13 @@ const MultiSelectDropdown = (props) => {
     <div style={style || { width: '50%' }}>
       <CLabel htmlFor={htmlFor}>{text.label}</CLabel>
       <MultiSelect
-          options={options || []}
-          title={title}
-          value={value}
-          onChange={handleChange}
-          getOptions={getOptions}
-          dataKey={dataKey}
-          {...nestedProps}
+        options={options || []}
+        title={title}
+        value={value}
+        onChange={handleChange}
+        getOptions={getOptions}
+        dataKey={dataKey}
+        {...nestedProps}
       />
     </div>
   )

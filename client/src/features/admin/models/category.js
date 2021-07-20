@@ -5,8 +5,10 @@ const text = {
 }
 
 const categoryModel = {
+  dataKey: 'CATEGORIES',
   name: {
     key: 'name',
+    dataKey: 'name',
     label: 'Name',
     isForm: true,
     text: {

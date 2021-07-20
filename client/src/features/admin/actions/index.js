@@ -5,8 +5,16 @@ import {
   GET_PRODUCTS,
   GET_ORDERS,
   UPDATE_DATA,
-  CREATE_PRODUCT
+  CREATE_PRODUCT,
+  CREATE_CATEGORY
 } from './types'
+
+export const createCategory = () => {
+  return {
+    type: CREATE_CATEGORY,
+    payload: {}
+  }
+}
 
 export const getRoles = () => {
   return {

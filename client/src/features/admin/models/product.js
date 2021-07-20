@@ -43,6 +43,7 @@ const productModel = {
     text: {
       label: text.categories,
     },
+    value: [],
     component: MultiSelectDropdown
   },
   description: {

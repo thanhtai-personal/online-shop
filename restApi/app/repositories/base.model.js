@@ -31,7 +31,7 @@ const createModel = (Model, modelName, tableName, extendsProperties = {}, option
     hooks: {
       beforeCreate: async (model, options) => {
         if (!uuidValidate(model.id)) {
-          category.id = uuidv4()
+          model.id = uuidv4()
         }
       },
       ...(hooks || {})

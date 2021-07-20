@@ -17,7 +17,7 @@ class ProductController extends BaseController {
     }
   }
 
-  addOrEditCategory = async (req, res) => {
+  createCategory = async (req, res) => {
     try {
       const dataReq = req.body
       let reponse = await this._productService.addOrEditCategory({ ...dataReq, authData: req.authData })

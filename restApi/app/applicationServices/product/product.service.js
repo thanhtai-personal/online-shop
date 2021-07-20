@@ -6,8 +6,15 @@ const ProductCategoryService = require('./../../repositories/product/services/pr
 const OrderProductService = require('./../../repositories/product/services/orderProduct.service')
 const ImageService = require('./../../repositories/product/services/image.service')
 
+String.prototype.toCamelCase = function (str) {
+  return str
+    .replace(/\s(.)/g, function ($1) { return $1.toUpperCase(); })
+    .replace(/\s/g, '')
+    .replace(/^(.)/, function ($1) { return $1.toLowerCase(); });
+}
+
 class ProductService extends BaseService {
-  constructor (
+  constructor(
     roleService,
     userService,
     productService,
@@ -27,7 +34,7 @@ class ProductService extends BaseService {
   }
 
   addOrEdit = async (dataReq) => {
-    const { authData, images = [], ...nestedData} = dataReq
+    const { authData, images = [], ...nestedData } = dataReq
     const product = await this._productService.create({
       ...nestedData,
       createdBy: authData.user?.id,
@@ -53,6 +60,7 @@ class ProductService extends BaseService {
     const { authData, ...nestedData } = dataReq
     return await this._categoryService.create({
       ...nestedData,
+      key: (nestedData.name || '').toCamelCase(),
       createdBy: authData.user?.id,
       updatedBy: authData.user?.id,
       createdTime: new Date(),

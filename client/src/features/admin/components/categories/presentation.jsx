@@ -8,7 +8,6 @@ import {
   CButton,
   CCardTitle
 } from '@coreui/react'
-import categoryModel from '../../models/category'
 import Table from 'root/commonComponents/table'
 import Modal from 'root/commonComponents/modal'
 import modalTypes from 'root/commonComponents/modal/type'
@@ -20,11 +19,13 @@ const text = {
   createCategory: 'Add new category',
   createCategoryText: {
     title: 'Create category'
-  }
+  },
+  title: 'Create category'
 }
 
 const CategoriesView = (props) => {
-  const { listCategories, take = 10, skip = 0 } = props
+  const { listCategories, take = 10, skip = 0
+    , updateData, model, createCategory, } = props
 
   const [isOpenModalCreate, setIsOpenModalCreate] = useState(false)
 
@@ -46,7 +47,7 @@ const CategoriesView = (props) => {
         </CardActionStyled>
       </CCardHeader>
       <CCardBody>
-        <Table model={categoryModel} data={listCategories} options={{ pagination: true, take, skip }} />
+        <Table model={model} data={listCategories} options={{ pagination: true, take, skip }} />
       </CCardBody>
       <CCardFooter>
       </CCardFooter>
@@ -57,7 +58,10 @@ const CategoriesView = (props) => {
       text={text.createCategoryText}
     >
       <Form type={formTypes.coreuiForm}
-        model={categoryModel}
+        model={model}
+        onUpdateData={updateData}
+        onSubmit={createCategory}
+        title={text.title}
       />
     </Modal>
   </CategoryViewStyled>)

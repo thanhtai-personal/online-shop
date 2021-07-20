@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
-    maxWidth: 300,
+    width: '100%'
   },
   chips: {
     display: 'flex',
@@ -50,31 +50,34 @@ export default function MultipleSelect(props) {
     getOptions && typeof getOptions === 'function' && getOptions(dataKey)
   }, [getOptions, dataKey])
 
+  const getName = useCallback((_id) => {
+    const obj = options.find((opt) => opt.id === _id) || {}
+    return obj.label || obj.name
+  }, [options])
+
   return (
-    <div>    
-      <FormControl className={classes.formControl}>
-        <InputLabel>{title}</InputLabel>
-        <Select
-          multiple
-          value={value}
-          onChange={handleChange}
-          input={<Input id='select-multiple-chip' />}
-          renderValue={(selected) => (
-            <div className={classes.chips}>
-              {selected.map((value) => (
-                <Chip key={value} label={value} className={classes.chip} />
-              ))}
-            </div>
-          )}
-          MenuProps={MenuProps}
-        >
-          {options.map((opt) => (
-            <MenuItem key={opt.key} value={opt.value}>
-              {opt.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+    <FormControl className={classes.formControl}>
+      <InputLabel>{title}</InputLabel>
+      <Select
+        multiple
+        value={value}
+        onChange={handleChange}
+        input={<Input id='select-multiple-chip' />}
+        renderValue={(selected) => (
+          <div className={classes.chips}>
+            {selected.map((v) => (
+              <Chip key={v} label={getName(v)} className={classes.chip} />
+            ))}
+          </div>
+        )}
+        MenuProps={MenuProps}
+      >
+        {options.map((opt) => (
+          <MenuItem key={opt.id} value={opt.id}>
+            {opt.value || opt.name}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   )
 }
