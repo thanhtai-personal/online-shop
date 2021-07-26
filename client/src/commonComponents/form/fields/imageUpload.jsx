@@ -1,12 +1,11 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useEffect, useMemo } from 'react'
 import {
   CLabel,
   CInputFile,
   CTextarea
 } from '@coreui/react'
 import defaultUploadImage from 'root/assets/images/defaultUpload.png'
-import { useEffect } from 'react'
-import { useMemo } from 'react'
+import { ImageUploadStyled } from './styled'
 
 const textDefault = {
   imageUrlPlaceholder: 'Enter image url...',
@@ -15,8 +14,11 @@ const textDefault = {
 }
 
 const ImageUpload = (props) => {
-  const { placeholder, autoComplete, text = {}, requiredGoogleUpload = false
-    , style, onChange, dataKey, value = [], ...nestedProps
+  const { placeholder, autoComplete, text = {}
+    , requiredGoogleUpload = false, style, onChange
+    , dataKey, value = [], isLinkedGoogle = false
+    , disabled = false
+    , ...nestedProps
   } = props
 
   const [selectedImage, setSelectedImage] = useState(null)
@@ -57,12 +59,8 @@ const ImageUpload = (props) => {
   }, [value])
 
   return (
-    <div style={style || {
-      width: '90%',
-      display: 'flex',
-      flexDirection: 'row'
-    }}>
-      <div style={{ width: '50%', paddingRight: '2em' }}>
+    <ImageUploadStyled>
+      <div className={'input-panel'}>
         <CLabel htmlFor={'url-input'}>{textDefault.imageUrlLabel}</CLabel>
         <CTextarea
           type={'url'}
@@ -75,53 +73,38 @@ const ImageUpload = (props) => {
           disabled
           rows={5}
         />
-        <CLabel style={{ marginTop: '1em' }} htmlFor={'image-input'}>{textDefault.imageFileLabel}</CLabel>
+        <CLabel className={'margin-top-1em'} htmlFor={'image-input'}>{textDefault.imageFileLabel}</CLabel>
         <CInputFile
           // type={'file'}
           onChange={handleChangeFileInput}
           id={'image-input'}
           name={'image-input'}
-          style={{
-            width: '100%'
-          }}
           accept={'image/*'}
           multiple
+          disabled={!isLinkedGoogle || disabled}
           {...nestedProps}
         />
       </div>
-      <div style={{
-        width: '50%',
-        display: 'flex',
-        justifyContent: 'flex-start'
-      }}>
+      <div className={'picture-showing'}>
         <picture
-          style={{ width: '80%', height: '350px' }}
           key={`showing-image`}>
           <img src={selectedImage ? 
             selectedImage.src || window.URL.createObjectURL(selectedImage)
             : defaultUploadImage
           } alt={selectedImage?.name || 'default-image'}
-            style={{ width: '100%', maxHeight: '350px' }} />
+          />
         </picture>
-        <div
-          style={{ width: '20%',
-            display: 'flex',
-            flexDirection: 'column-reverse',
-            maxHeight: '350px',
-            overflow: 'auto'
-          }}
-        >{value && value.map((_image, index) => (
+        <div className={'picture-list-items'}>{value && value.map((_image, index) => (
           <picture onClick={() => {
             handleImageClick(index)
           }}
-            style={{ width: '100%', cursor: 'pointer' }}
             key={`image-${_image.name}-${index}`}>
-            <img src={_image.src || window.URL.createObjectURL(_image)} alt={_image.name} style={{ width: '100%' }} />
+            <img src={_image.src || window.URL.createObjectURL(_image)} alt={_image.name}/>
           </picture>
         ))}
         </div>
       </div>
-    </div>
+    </ImageUploadStyled>
   )
 }
 
