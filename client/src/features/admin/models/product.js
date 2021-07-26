@@ -44,6 +44,7 @@ const productModel = {
       label: text.categories,
     },
     value: [],
+    useCheckbox: true,
     component: MultiSelectDropdown
   },
   description: {

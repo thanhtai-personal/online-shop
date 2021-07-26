@@ -46,7 +46,10 @@ const productsReducer = (state = initalState, { type, payload }) => {
           [payload.fieldName]: {
             ...state.model[payload.fieldName],
             value: payload.value
-          }
+          },
+          options: state.model[payload.fieldName].options.map((opt) => {
+            return opt
+          })
         }
       }
     }

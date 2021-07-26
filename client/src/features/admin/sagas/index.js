@@ -95,7 +95,8 @@ function* getOrders(action = {}) {
 
 function* updateData({ type, payload }) {
   const { modelName, fieldName, value, option } = payload
-  yield put({ type: `UPDATE_DATA_${modelName}`, payload: { fieldName, value, option } })
+  const { isCheckbox } = option
+  yield put({ type: `UPDATE_DATA_${modelName}`, payload: { fieldName, value } })
 }
 
 function* createProduct(action = {}) {

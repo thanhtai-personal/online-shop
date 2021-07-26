@@ -1,29 +1,39 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
-import Chip from '@material-ui/core/Chip'
-import { useEffect } from 'react'
+import {
+  Input,
+  MenuItem,
+  FormControl,
+  Select,
+  Chip,
+} from '@material-ui/core'
+import ItemWithCheckbox from './menuItemWithCheckbox'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = (props) => makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
-    width: '100%'
+    width: '100%',
+    border: 'solid 1px #d8dbe0',
+    borderRadius: '5px',
+    backgroundColor: '#FFFFFF',
+    margin: 0
+  },
+  inputLabel: {
+    paddingLeft: '1em',
+    fontSize: (props.value && props.value?.length > 0) ? '6px' : 'initial'
   },
   chips: {
     display: 'flex',
     flexWrap: 'wrap',
+    backgroundColor: '#FFFFFF'
   },
   chip: {
-    margin: 2,
+    margin: 0,
   },
-  noLabel: {
-    marginTop: theme.spacing(3),
-  },
+  selectInput: {
+    marginTop: 0,
+  }
 }))
 
 const ITEM_HEIGHT = 48
@@ -38,9 +48,9 @@ const MenuProps = {
 }
 
 export default function MultipleSelect(props) {
-  const { title, value, onChange, options, getOptions, dataKey } = props
+  const { title, value, onChange, options, getOptions, dataKey, useCheckbox } = props
 
-  const classes = useStyles()
+  const classes = useStyles(props)()
 
   const handleChange = useCallback((event) => {
     event.preventDefault()
@@ -51,33 +61,52 @@ export default function MultipleSelect(props) {
     getOptions && typeof getOptions === 'function' && getOptions(dataKey)
   }, [getOptions, dataKey])
 
-  const getName = useCallback((_id) => {
-    const obj = options.find((opt) => opt.id === _id) || {}
-    return obj.label || obj.name
-  }, [options])
+  const optionMapping = useMemo(() => {
+    let _optionMapping = {}
+    options && options.forEach((opt) => {
+      _optionMapping[opt.id] = opt
+      if (useCheckbox) _optionMapping[opt.id].checked = !!(value?.includes(opt.id))
+    })
+    return _optionMapping
+  }, [options, value, useCheckbox])
+
+
+  const renderValue = useCallback((selected) => {
+    return (<div className={classes.chips}>
+      {selected.map((v) => (
+        <Chip key={v} label={optionMapping[v]
+          ? optionMapping[v].label || optionMapping[v].name
+          : v
+        } className={classes.chip} />
+      ))}
+    </div>)
+  }, [optionMapping])
+
+  const handleClickItem = useCallback((item) => {
+    if (item.checked) {
+      onChange && typeof onChange === 'function' && onChange(value.filter((v) => v !== item.id))
+    } else {
+      onChange && typeof onChange === 'function' && onChange([...value, item.id])
+    }
+  }, [value, onChange])
 
   return (
     <FormControl className={classes.formControl}>
-      <InputLabel>{title}</InputLabel>
       <Select
         multiple
         value={value}
-        onChange={handleChange}
-        input={<Input id='select-multiple-chip' />}
-        renderValue={(selected) => (
-          <div className={classes.chips}>
-            {selected.map((v) => (
-              <Chip key={v} label={getName(v)} className={classes.chip} />
-            ))}
-          </div>
-        )}
+        input={<Input className={classes.selectInput} id='select-multiple-chip' />}
+        renderValue={renderValue}
         MenuProps={MenuProps}
+        placeholder={title}
+        onChange={handleChange}
       >
-        {options.map((opt) => (
+        {useCheckbox ? options.map((opt) => (
+          <ItemWithCheckbox onClickItem={handleClickItem} key={opt.id} item={opt}/>
+        )) : options.map((opt) => (
           <MenuItem key={opt.id} value={opt.id}>
-            {opt.value || opt.name}
-          </MenuItem>
-        ))}
+            {opt.label || opt.name || opt.id}
+          </MenuItem>))}
       </Select>
     </FormControl>
   )
