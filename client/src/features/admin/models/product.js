@@ -81,7 +81,7 @@ const productModel = {
   createdBy: {
     key: 'createBy',
     label: text.createdBy,
-    render: (value, users) => {
+    render: (value, users = []) => {
       // for custom field in table
       const user = users.find((u => u.id === value)) || {}
       return <span>{user.userName || user.email || user.name}</span>

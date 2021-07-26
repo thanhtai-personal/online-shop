@@ -43,6 +43,7 @@ export default function MultipleSelect(props) {
   const classes = useStyles()
 
   const handleChange = useCallback((event) => {
+    event.preventDefault()
     onChange && typeof onChange === 'function' && onChange(event.target.value)
   }, [onChange])
 

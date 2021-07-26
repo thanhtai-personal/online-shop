@@ -101,9 +101,24 @@ function* updateData({ type, payload }) {
 function* createProduct(action = {}) {
   const productData = yield select((state) => state[PRODUCTS_KEY].model)
   try {
+    const images = (productData.images?.value || []).map((img) => {
+      let imageSrc = img.src || img.url || null
+      if (!imageSrc) {
+        //process with a file data
+        const fileReader = new FileReader()
+        imageSrc = fileReader.readAsDataURL(img)
+      }
+      let serverImage = {
+        name: img.name,
+        size: img.size,
+        type: img.type,
+        src: imageSrc
+      }
+      return serverImage
+    })
     const submitData = {
       name: productData.name?.value,
-      images: productData.images?.value,
+      images: images,
       video: productData.video?.value,
       description: productData.description?.value
     }

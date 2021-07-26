@@ -10,8 +10,8 @@ const MultiSelectDropdown = (props) => {
     , dataKey, style, htmlFor, title, getOptions
     , type, id, name, placeholder, autoComplete, text = {}, ...nestedProps } = props
 
-  const handleChange = useCallback((e) => {
-    onChange && typeof onChange === 'function' && onChange(dataKey, e.target.value)
+  const handleChange = useCallback((value) => {
+    onChange && typeof onChange === 'function' && onChange(dataKey, value)
   }, [onChange, dataKey])
 
   return (

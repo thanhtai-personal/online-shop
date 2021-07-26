@@ -24,7 +24,11 @@ const ImageUpload = (props) => {
   const handleChangeFileInput = useCallback((e) => {
     let newImages = []
     for (let file of e.target.files) {
-      newImages.push(file)
+      const imageSrc = window.URL.createObjectURL(file)
+      newImages.push({
+        src: imageSrc,
+        ...file
+      })
     }
     onChange && typeof onChange === 'function' && onChange(dataKey, newImages)
   }, [onChange, dataKey])

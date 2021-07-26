@@ -25,7 +25,7 @@ const VideoEmbed = (props) => {
   // const [ embedId, setEmbedId ] = useState(null)
 
   const embedId = useMemo(() => {
-    const findEmbedId = (value || '').match(/(embed\/[A-Z])\w+/g) || ['']
+    const findEmbedId = (value || '').match(/(embed\/[A-Za-z0-9])\w+/g) || ['']
     return findEmbedId[0].split('/')[1]
   }, [value])
 
