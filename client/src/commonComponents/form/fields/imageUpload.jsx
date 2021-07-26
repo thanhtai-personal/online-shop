@@ -11,11 +11,11 @@ import { useMemo } from 'react'
 const textDefault = {
   imageUrlPlaceholder: 'Enter image url...',
   imageUrlLabel: 'Image URL (split by ,)',
-  imageFileLabel: 'upload images'
+  imageFileLabel: 'Upload images'
 }
 
 const ImageUpload = (props) => {
-  const { placeholder, autoComplete, text = {}
+  const { placeholder, autoComplete, text = {}, requiredGoogleUpload = false
     , style, onChange, dataKey, value = [], ...nestedProps
   } = props
 
