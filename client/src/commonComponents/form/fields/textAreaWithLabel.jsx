@@ -17,7 +17,7 @@ const TextWithLabel = (props) => {
   }, [onChange, dataKey])
 
   return (
-    <div style={style || { width: '50%' }}>
+    <div key={`text-area-with-label-${id}`} style={style || { width: '50%' }}>
       <CLabel htmlFor={htmlFor}>{text.label}</CLabel>
       <CTextarea
         type={type}

@@ -4,24 +4,41 @@ import {
   CInputFile,
   CTextarea
 } from '@coreui/react'
+import PictureListItem from './pictureListItem'
 import defaultUploadImage from 'root/assets/images/defaultUpload.png'
+import GoogleLogin from 'react-google-login'
 import { ImageUploadStyled } from './styled'
 
 const textDefault = {
   imageUrlPlaceholder: 'Enter image url...',
   imageUrlLabel: 'Image URL (split by ,)',
-  imageFileLabel: 'Upload images'
+  imageFileLabel: 'Upload images',
+  integrateGoogle: 'Connect google driver'
 }
 
 const ImageUpload = (props) => {
   const { placeholder, autoComplete, text = {}
     , requiredGoogleUpload = false, style, onChange
-    , dataKey, value = [], isLinkedGoogle = false
+    , dataKey, value = [], isLinkedGoogle = false, id
     , disabled = false
     , ...nestedProps
   } = props
+  const usingText = {
+    ...textDefault,
+    ...text
+  }
 
   const [selectedImage, setSelectedImage] = useState(null)
+  const onGoogleLoginSuccess = useCallback((googleUser) => {
+    const googleProfile = googleUser.getBasicProfile()
+    const profile = {
+      email: googleProfile.getEmail(),
+      socialId: googleProfile.getId(),
+      token: googleUser.getAuthResponse().id_token
+    }
+    console.log('profile', profile)
+  }, [])
+
 
   const handleChangeFileInput = useCallback((e) => {
     let newImages = []
@@ -59,7 +76,7 @@ const ImageUpload = (props) => {
   }, [value])
 
   return (
-    <ImageUploadStyled>
+    <ImageUploadStyled key={`upload-image-${id}`}>
       <div className={'input-panel'}>
         <CLabel htmlFor={'url-input'}>{textDefault.imageUrlLabel}</CLabel>
         <CTextarea
@@ -75,7 +92,6 @@ const ImageUpload = (props) => {
         />
         <CLabel className={'margin-top-1em'} htmlFor={'image-input'}>{textDefault.imageFileLabel}</CLabel>
         <CInputFile
-          // type={'file'}
           onChange={handleChangeFileInput}
           id={'image-input'}
           name={'image-input'}
@@ -85,24 +101,35 @@ const ImageUpload = (props) => {
           {...nestedProps}
         />
       </div>
-      <div className={'picture-showing'}>
-        <picture
-          key={`showing-image`}>
-          <img src={selectedImage ? 
-            selectedImage.src || window.URL.createObjectURL(selectedImage)
-            : defaultUploadImage
-          } alt={selectedImage?.name || 'default-image'}
-          />
-        </picture>
-        <div className={'picture-list-items'}>{value && value.map((_image, index) => (
-          <picture onClick={() => {
-            handleImageClick(index)
-          }}
-            key={`image-${_image.name}-${index}`}>
-            <img src={_image.src || window.URL.createObjectURL(_image)} alt={_image.name}/>
+      <div className={`picture-showing ${!isLinkedGoogle && 'google-btn-wrapper'}`}>
+        {isLinkedGoogle ? <>
+          <picture
+            key={`showing-image`}>
+            <img src={selectedImage ?
+              selectedImage.src || window.URL.createObjectURL(selectedImage)
+              : defaultUploadImage
+            } alt={selectedImage?.name || 'default-image'}
+            />
           </picture>
-        ))}
-        </div>
+          <div className={'picture-list-items'}>{value && value.map((_image, index) => (
+            <PictureListItem
+              key={`picture-list-item-${index}`}
+              onClickItem={handleImageClick}
+              image={_image} index={index} />
+          ))}
+          </div>
+        </>
+          : <div id={'google-login-btn'}>
+            <GoogleLogin
+              className={'google-login'}
+              clientId='404281480421-lbrm3qknrffqpndu06u4925047tt4ee3.apps.googleusercontent.com'
+              buttonText={usingText.integrateGoogle}
+              onSuccess={onGoogleLoginSuccess}
+              // onFailure={onGGLoginFailure}
+              cookiePolicy={'single_host_origin'}
+              className={'google-login-btn'}
+            /></div>
+        }
       </div>
     </ImageUploadStyled>
   )

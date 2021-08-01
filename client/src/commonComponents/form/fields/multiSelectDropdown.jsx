@@ -15,7 +15,7 @@ const MultiSelectDropdown = (props) => {
   }, [onChange, dataKey])
 
   return (
-    <div style={style || { width: '50%' }}>
+    <div key={`multi-select-${id}`} style={style || { width: '50%' }}>
       <CLabel htmlFor={htmlFor}>{text.label}</CLabel>
       <MultiSelect
         options={options || []}

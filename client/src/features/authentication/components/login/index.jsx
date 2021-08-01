@@ -45,6 +45,7 @@ const LoginComponent = (props) => {
     updateField(field, e?.target?.value)
     validateField(field, e?.target?.value)
   }, [updateField, validateField])
+  
   return (<LoginView
     onLogin={handleLogin}
     onGoogleLogin={onGGLoginSuccess}

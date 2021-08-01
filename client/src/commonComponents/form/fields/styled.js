@@ -41,4 +41,18 @@ input[type='file'] {
     }
   }
 }
+
+button.google-login-btn {
+  background-color: rgba(70,130,180, 0.7) !important;
+  height: 3em;
+  span {
+    color: rgba(255,255,255, 0.7);
+  }
+}
+
+.picture-showing.google-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 `

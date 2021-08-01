@@ -34,7 +34,7 @@ const VideoEmbed = (props) => {
   }, [onChange, dataKey])
 
   return (
-    <div style={{
+    <div key={`video-embed-${id}`} style={{
       width: '90%',
       display: 'flex',
       flexDirection: 'row'
